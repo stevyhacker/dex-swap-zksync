@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { Header } from './Header'
 import { Footer } from './Footer'
+import { Dex } from '@/components/Dex'
 
 export function Layout(props: PropsWithChildren) {
   return (
