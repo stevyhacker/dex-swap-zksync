@@ -18,7 +18,7 @@ export function Dex() {
     (index: number) => async () => {
       console.log('Deploying ERC20 token')
       console.log('Deployer account: ' + address)
-      if (address != undefined) {
+      if (walletClient != undefined && address != undefined) {
         const hash = await walletClient.deployContract({
           abi: usdcABI,
           account: address,
@@ -43,7 +43,7 @@ export function Dex() {
         alert('Connect your wallet first')
       }
     },
-    []
+    [walletClient, address]
   )
 
   return (

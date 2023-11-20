@@ -1733,7 +1733,7 @@ export function writeErc20<TFunctionName extends string>(
  */
 export function prepareWriteErc20<
   TAbi extends readonly unknown[] = typeof erc20ABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: erc20ABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -1753,7 +1753,7 @@ export function getErc20Burnable(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readErc20Burnable<
   TAbi extends readonly unknown[] = typeof erc20BurnableABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: erc20BurnableABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -1777,7 +1777,7 @@ export function writeErc20Burnable<TFunctionName extends string>(
  */
 export function prepareWriteErc20Burnable<
   TAbi extends readonly unknown[] = typeof erc20BurnableABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: erc20BurnableABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -1817,7 +1817,7 @@ export function writeErc721<TFunctionName extends string>(
  */
 export function prepareWriteErc721<
   TAbi extends readonly unknown[] = typeof erc721ABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: erc721ABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -1880,7 +1880,7 @@ export function writeIerc20<TFunctionName extends string>(
  */
 export function prepareWriteIerc20<
   TAbi extends readonly unknown[] = typeof ierc20ABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc20ABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -1907,7 +1907,7 @@ export function getIerc20Metadata(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readIerc20Metadata<
   TAbi extends readonly unknown[] = typeof ierc20MetadataABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: ierc20MetadataABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -1931,7 +1931,7 @@ export function writeIerc20Metadata<TFunctionName extends string>(
  */
 export function prepareWriteIerc20Metadata<
   TAbi extends readonly unknown[] = typeof ierc20MetadataABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc20MetadataABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -1971,7 +1971,7 @@ export function writeIerc721<TFunctionName extends string>(
  */
 export function prepareWriteIerc721<
   TAbi extends readonly unknown[] = typeof ierc721ABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc721ABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -1998,7 +1998,7 @@ export function getIerc721Metadata(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readIerc721Metadata<
   TAbi extends readonly unknown[] = typeof ierc721MetadataABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: ierc721MetadataABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -2022,7 +2022,7 @@ export function writeIerc721Metadata<TFunctionName extends string>(
  */
 export function prepareWriteIerc721Metadata<
   TAbi extends readonly unknown[] = typeof ierc721MetadataABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc721MetadataABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -2056,7 +2056,7 @@ export function writeIerc721Receiver<TFunctionName extends string>(
  */
 export function prepareWriteIerc721Receiver<
   TAbi extends readonly unknown[] = typeof ierc721ReceiverABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc721ReceiverABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -2105,7 +2105,7 @@ export function readMessage<TAbi extends readonly unknown[] = typeof messageABI,
 export function writeMessage<
   TFunctionName extends string,
   TMode extends WriteContractMode,
-  TChainId extends number = keyof typeof messageAddress
+  TChainId extends number = keyof typeof messageAddress,
 >(
   config:
     | (Omit<WriteContractPreparedArgs<typeof messageABI, TFunctionName>, 'abi' | 'address'> & {
@@ -2131,7 +2131,7 @@ export function writeMessage<
  */
 export function prepareWriteMessage<
   TAbi extends readonly unknown[] = typeof messageABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(
   config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi' | 'address'> & {
     chainId?: keyof typeof messageAddress
@@ -2176,7 +2176,7 @@ export function writeNexthFt<TFunctionName extends string>(
  */
 export function prepareWriteNexthFt<
   TAbi extends readonly unknown[] = typeof nexthFtABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: nexthFtABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -2216,7 +2216,7 @@ export function writeOwnable<TFunctionName extends string>(
  */
 export function prepareWriteOwnable<
   TAbi extends readonly unknown[] = typeof ownableABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ownableABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -2263,7 +2263,7 @@ export function writeUsdc<TFunctionName extends string>(
  */
 export function prepareWriteUsdc<
   TAbi extends readonly unknown[] = typeof usdcABI,
-  TFunctionName extends string = string
+  TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: usdcABI, ...config } as unknown as PrepareWriteContractConfig<TAbi, TFunctionName>)
 }
