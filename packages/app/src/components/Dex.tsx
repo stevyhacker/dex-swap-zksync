@@ -20,12 +20,12 @@ export function Dex() {
   const [token1Input, setToken1Input] = useState(0)
   const [token2Input, setToken2Input] = useState(0)
 
-  const handleToken1InputChange = (event) => {
-    setToken1Input(event.target.value)
+  const handleToken1InputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setToken1Input(Number(event.target.value))
   }
 
-  const handleToken2InputChange = (event) => {
-    setToken2Input(event.target.value)
+  const handleToken2InputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setToken2Input(Number(event.target.value))
   }
 
   const token1Balance = useBalance({
