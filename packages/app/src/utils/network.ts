@@ -1,6 +1,6 @@
 import { mainnet, sepolia, zkSync, zkSyncTestnet } from '@wagmi/core/chains'
 
-export const ETH_CHAINS = [mainnet, sepolia, zkSync, zkSyncTestnet]
+export const ETH_CHAINS = [zkSyncTestnet]
 
 export function GetNetworkColor(chain?: string) {
   if (chain === 'homestead') return 'green'
