@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Address, useAccount, useBalance, usePublicClient, useWalletClient } from 'wagmi'
 import { getUsdc, usdcABI } from '@/abis'
-import { formatEther, getContractAddress, parseEther } from 'viem'
+import { formatEther, getContractAddress, parseEther, parseUnits } from 'viem'
 import { getBlockNumber, getTransactionCount } from 'viem/actions'
 
 export function Dex() {
@@ -15,6 +15,18 @@ export function Dex() {
   // const [token2Address, setToken2Address] = React.useState('0xa72609480b99D71B29326F6267e7c0EC649de093')
   const token1Address = '0x5B1F61B316baaE16E55b497258D40D62E222A049'
   const token2Address = '0xa72609480b99D71B29326F6267e7c0EC649de093'
+  const uniswapRouter = '0x0BBDfB697D515EF154628d659724C58d8e0D5CDC'
+
+  const [token1Input, setToken1Input] = useState(0)
+  const [token2Input, setToken2Input] = useState(0)
+
+  const handleToken1InputChange = (event) => {
+    setToken1Input(event.target.value)
+  }
+
+  const handleToken2InputChange = (event) => {
+    setToken2Input(event.target.value)
+  }
 
   const token1Balance = useBalance({
     address: address,
@@ -75,15 +87,68 @@ export function Dex() {
           abi: usdcABI,
           address: tokenAddress as Address,
           functionName: 'mint',
-          args: [address, parseEther('1000')],
+          args: [address, parseUnits('1000', 6)],
         })
         await walletClient.writeContract(request)
       } else {
         alert('Connect your wallet first')
       }
     },
-    [walletClient, address]
+    [publicClient, walletClient, address]
   )
+
+  async function addLiquidity() {
+    console.log('Approving tokens before adding liquidity')
+    if (walletClient != undefined && address != undefined) {
+      //check allowance of the USDC ERC20 token and approve if needed
+
+      const allowance = await publicClient.readContract({
+        account: address,
+        abi: usdcABI,
+        address: token1Address as Address,
+        functionName: 'allowance',
+        args: [address, uniswapRouter],
+      })
+
+      console.log('Allowance of token1: ' + allowance)
+
+      const allowance2 = await publicClient.readContract({
+        account: address,
+        abi: usdcABI,
+        address: token1Address as Address,
+        functionName: 'allowance',
+        args: [address, uniswapRouter],
+      })
+
+      console.log('Allowance of token2: ' + allowance2)
+
+      if (allowance < parseUnits(token1Input.toString(), 6)) {
+        const { request: approve1 } = await publicClient.simulateContract({
+          account: address,
+          abi: usdcABI,
+          address: token1Address as Address,
+          functionName: 'approve',
+          args: [uniswapRouter, parseUnits(token1Input.toString(), 6)],
+        })
+        walletClient.writeContract(approve1)
+      }
+
+      if (allowance2 < parseUnits(token2Input.toString(), 6)) {
+        const { request: approve2 } = await publicClient.simulateContract({
+          account: address,
+          abi: usdcABI,
+          address: token2Address as Address,
+          functionName: 'approve',
+          args: [uniswapRouter, parseUnits(token2Input.toString(), 6)],
+        })
+        walletClient.writeContract(approve2)
+      }
+
+      console.log('Adding liquidity')
+    } else {
+      alert('Connect your wallet first')
+    }
+  }
 
   return (
     <>
@@ -110,19 +175,33 @@ export function Dex() {
       <p className='text-lg mt-4'>Token 1</p>
 
       <input type='text' value={token1Address} className='input input-bordered input-primary w-full max-w-md' />
-      <input type='number' placeholder='0.0' className='input input-bordered input-secondary w-full max-w-xs mt-2' />
+      <input
+        type='number'
+        value={token1Input}
+        placeholder='0.0'
+        onChange={handleToken1InputChange}
+        className='input input-bordered input-secondary w-full max-w-xs mt-2'
+      />
 
       <br />
       <br />
 
       <p className='text-lg'>Token 2</p>
       <input type='text' value={token2Address} className='input input-bordered input-primary w-full max-w-md' />
-      <input type='number' placeholder='0.0' className='input input-bordered input-secondary w-full max-w-xs mt-2' />
+      <input
+        type='number'
+        value={token2Input}
+        placeholder='0.0'
+        onChange={handleToken2InputChange}
+        className='input input-bordered input-secondary w-full max-w-xs mt-2'
+      />
 
       <br />
       <br />
 
-      <button className='btn btn-secondary mr-4'>Add Liquidity</button>
+      <button onClick={addLiquidity} className='btn btn-secondary mr-4'>
+        Add Liquidity
+      </button>
 
       <button className='btn btn-primary'>Swap</button>
     </>
