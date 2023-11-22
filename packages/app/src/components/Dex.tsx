@@ -5,36 +5,7 @@ import { Address, useAccount, useBalance, usePublicClient, useWalletClient } fro
 import { getUsdc, nonfungiblePositionManagerABI, usdcABI, writeNonfungiblePositionManager } from '@/abis'
 import { formatEther, getContractAddress, parseEther, parseUnits } from 'viem'
 import { getBlockNumber, getTransactionCount } from 'viem/actions'
-import { BigNumber, BigNumberish } from 'ethers'
-import bn from 'bignumber.js'
-
-bn.config({ EXPONENTIAL_AT: 999999, DECIMAL_PLACES: 40 })
-
-export function encodePriceSqrt(reserve1: BigNumberish, reserve0: BigNumberish): BigNumber {
-  return BigNumber.from(
-    new bn(reserve1.toString())
-      .div(reserve0.toString())
-      .sqrt()
-      .multipliedBy(new bn(2).pow(96))
-      .integerValue(3)
-      .toString()
-  )
-}
-
-export const getMinTick = (tickSpacing: number) => Math.ceil(-887272 / tickSpacing) * tickSpacing
-export const getMaxTick = (tickSpacing: number) => Math.floor(887272 / tickSpacing) * tickSpacing
-
-export enum FeeAmount {
-  LOW = 500,
-  MEDIUM = 3000,
-  HIGH = 10000,
-}
-
-export const TICK_SPACINGS: { [amount in FeeAmount]: number } = {
-  [FeeAmount.LOW]: 10,
-  [FeeAmount.MEDIUM]: 60,
-  [FeeAmount.HIGH]: 200,
-}
+import { encodePriceSqrt, FeeAmount, getMaxTick, getMinTick, TICK_SPACINGS } from '@/utils'
 
 export function Dex() {
   const { address, isConnecting, isDisconnected } = useAccount()
@@ -150,7 +121,7 @@ export function Dex() {
         abi: nonfungiblePositionManagerABI,
         address: nonfungiblePositionManager as Address,
         functionName: 'createAndInitializePoolIfNecessary',
-        args: [token1Address as Address, token2Address as Address, poolFee, sqrtPrice],
+        args: [token1Address as Address, token2Address as Address, poolFee, BigInt(sqrtPrice.toString())],
       })
       walletClient.writeContract(createPool)
 
