@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Address, useAccount, useBalance, usePublicClient, useWalletClient } from 'wagmi'
 import { getUsdc, nonfungiblePositionManagerABI, usdcABI, writeNonfungiblePositionManager } from '@/abis'
 import { formatEther, getContractAddress, parseEther, parseUnits } from 'viem'
@@ -19,6 +19,39 @@ export function Dex() {
 
   const [token1Input, setToken1Input] = useState(0)
   const [token2Input, setToken2Input] = useState(0)
+  const [token1Allowance, setToken1Allowance] = useState(0n)
+  const [token2Allowance, setToken2Allowance] = useState(0n)
+  const [approveRequired, setApproveRequired] = useState(true)
+
+  useEffect(() => {
+    async function checkApprovals() {
+      const allowance = await publicClient.readContract({
+        account: address,
+        abi: usdcABI,
+        address: token1Address as Address,
+        functionName: 'allowance',
+        args: [address as Address, nonfungiblePositionManager],
+      })
+      setToken1Allowance(allowance)
+
+      const allowance2 = await publicClient.readContract({
+        account: address,
+        abi: usdcABI,
+        address: token1Address as Address,
+        functionName: 'allowance',
+        args: [address as Address, nonfungiblePositionManager],
+      })
+      setToken1Allowance(allowance2)
+
+      if (allowance >= parseUnits(token1Input.toString(), 6) && allowance2 >= parseUnits(token2Input.toString(), 6)) {
+        setApproveRequired(false)
+      } else {
+        setApproveRequired(true)
+      }
+    }
+
+    checkApprovals()
+  }, [address, publicClient, token1Input, token2Input, token1Allowance, token2Allowance])
 
   const handleToken1InputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setToken1Input(Number(event.target.value))
@@ -63,33 +96,11 @@ export function Dex() {
     [publicClient, walletClient, address]
   )
 
-  async function addLiquidity() {
-    console.log('Approving tokens before adding liquidity')
+  async function approveTokens() {
+    console.log('Approving tokens')
 
     if (walletClient != undefined && address != undefined) {
-      //check allowance of the USDC ERC20 token and approve if needed
-
-      const allowance = await publicClient.readContract({
-        account: address,
-        abi: usdcABI,
-        address: token1Address as Address,
-        functionName: 'allowance',
-        args: [address, nonfungiblePositionManager],
-      })
-
-      console.log('Allowance of token1: ' + allowance)
-
-      const allowance2 = await publicClient.readContract({
-        account: address,
-        abi: usdcABI,
-        address: token1Address as Address,
-        functionName: 'allowance',
-        args: [address, nonfungiblePositionManager],
-      })
-
-      console.log('Allowance of token2: ' + allowance2)
-
-      if (allowance < parseUnits(token1Input.toString(), 6)) {
+      if (token1Allowance < parseUnits(token1Input.toString(), 6)) {
         const { request: approve1 } = await publicClient.simulateContract({
           account: address,
           abi: usdcABI,
@@ -98,9 +109,10 @@ export function Dex() {
           args: [nonfungiblePositionManager, parseUnits(token1Input.toString(), 6)],
         })
         walletClient.writeContract(approve1)
+        setToken1Allowance(parseUnits(token1Input.toString(), 6))
       }
 
-      if (allowance2 < parseUnits(token2Input.toString(), 6)) {
+      if (token2Allowance < parseUnits(token2Input.toString(), 6)) {
         const { request: approve2 } = await publicClient.simulateContract({
           account: address,
           abi: usdcABI,
@@ -109,8 +121,26 @@ export function Dex() {
           args: [nonfungiblePositionManager, parseUnits(token2Input.toString(), 6)],
         })
         walletClient.writeContract(approve2)
+        setToken2Allowance(parseUnits(token2Input.toString(), 6))
       }
 
+      if (
+        token1Allowance >= parseUnits(token1Input.toString(), 6) &&
+        token2Allowance >= parseUnits(token2Input.toString(), 6)
+      ) {
+        setApproveRequired(false)
+      }
+
+      console.log('Tokens approved')
+    }
+  }
+
+  async function addLiquidity() {
+    if (token1Input == 0 || token2Input == 0) {
+      alert('Please enter a value for both tokens')
+      return
+    }
+    if (walletClient != undefined && address != undefined) {
       console.log('Adding liquidity')
 
       const poolFee = 3000
@@ -192,6 +222,12 @@ export function Dex() {
 
       <br />
       <br />
+
+      {approveRequired && (
+        <button onClick={approveTokens} className='btn btn-accent mr-4'>
+          Approve
+        </button>
+      )}
 
       <button onClick={addLiquidity} className='btn btn-secondary mr-4'>
         Add Liquidity
