@@ -21,7 +21,6 @@ if (!polygonApiKey) {
 }
 
 const config: HardhatUserConfig = {
-    solidity: "0.8.21",
     defaultNetwork: "hardhat",
     paths: {
         sources: path.resolve(__dirname, "./"),
@@ -33,6 +32,28 @@ const config: HardhatUserConfig = {
             sepolia: etherscanApiKey,
             polygonMumbai: polygonApiKey,
         },
+    },
+    solidity: {
+        compilers: [
+            // {
+            //     version: "0.8.21",
+            //     settings: {
+            //         optimizer: {
+            //             enabled: true,
+            //             runs: 200,
+            //         },
+            //     },
+            // },
+            {
+                version: "0.7.6",
+                settings: {
+                    optimizer: {
+                        enabled: true,
+                        runs: 200,
+                    },
+                },
+            },
+        ],
     },
     networks: {
         hardhat: {
