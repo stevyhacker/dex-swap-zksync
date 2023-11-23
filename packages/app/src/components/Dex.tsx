@@ -2,7 +2,14 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
 import { Address, useAccount, useBalance, usePublicClient, useWalletClient } from 'wagmi'
-import { getUsdc, nonfungiblePositionManagerABI, usdcABI, writeNonfungiblePositionManager } from '@/abis'
+import {
+  getUsdc,
+  iSwapRouterABI,
+  nonfungiblePositionManagerABI,
+  swapRouterABI,
+  usdcABI,
+  writeNonfungiblePositionManager,
+} from '@/abis'
 import { formatEther, getContractAddress, parseEther, parseUnits } from 'viem'
 import { getBlockNumber, getTransactionCount } from 'viem/actions'
 import { encodePriceSqrt, FeeAmount, getMaxTick, getMinTick, TICK_SPACINGS } from '@/utils'
@@ -18,7 +25,9 @@ export function Dex() {
   const nonfungiblePositionManager = '0xA87AA5CF925542436872207ffcDbFF792f388EA5'
 
   const [token1Input, setToken1Input] = useState(0)
+  const [token1SwapInput, setToken1SwapInput] = useState(0)
   const [token2Input, setToken2Input] = useState(0)
+  const [token2SwapInput, setToken2SwapInput] = useState(0)
   const [token1Allowance, setToken1Allowance] = useState(0n)
   const [token2Allowance, setToken2Allowance] = useState(0n)
   const [approveRequired, setApproveRequired] = useState(true)
@@ -57,8 +66,16 @@ export function Dex() {
     setToken1Input(Number(event.target.value))
   }
 
+  const handleToken1SwapInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setToken1SwapInput(Number(event.target.value))
+  }
+
   const handleToken2InputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setToken2Input(Number(event.target.value))
+  }
+
+  const handleToken2SwapInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setToken2SwapInput(Number(event.target.value))
   }
 
   const token1Balance = useBalance({
@@ -182,6 +199,60 @@ export function Dex() {
     }
   }
 
+  async function swapTokens() {
+    // ISwapRouter.ExactInputSingleParams memory params = ISwapRouter
+    //   .ExactInputSingleParams({
+    //     tokenIn: tokenIn,
+    //     tokenOut: tokenOut,
+    //     fee: poolFee,
+    //     recipient: msg.sender,
+    //     deadline: block.timestamp,
+    //     amountIn: amountIn,
+    //     amountOutMinimum: 0,
+    //     sqrtPriceLimitX96: 0
+    //   });
+    //
+    // amountOut = router.exactInputSingle(params);
+    if (walletClient != undefined && address != undefined) {
+      const { request: swapTokens } = await publicClient.simulateContract({
+        account: address,
+        abi: swapRouterABI,
+        address: uniswapRouter as Address,
+        functionName: 'exactInputSingle',
+        args: [
+          {
+            tokenIn: token1Address,
+            tokenOut: token2Address,
+            fee: 3000,
+            recipient: address as Address,
+            deadline: BigInt(Math.floor(Date.now() / 1000) + 60 * 10),
+            amountIn: parseUnits(token1SwapInput.toString(), 6),
+            amountOutMinimum: 0n,
+            sqrtPriceLimitX96: 0n,
+          },
+        ],
+      })
+      walletClient.writeContract(swapTokens)
+      console.log('Tokens swapped')
+    }
+  }
+
+  async function approveTokenForSwap() {
+    if (walletClient == undefined || address == undefined) {
+      alert('Connect your wallet first')
+      return
+    }
+
+    const { request: approve } = await publicClient.simulateContract({
+      account: address,
+      abi: usdcABI,
+      address: token1Address as Address,
+      functionName: 'approve',
+      args: [uniswapRouter, parseUnits(token1SwapInput.toString(), 6)],
+    })
+    walletClient.writeContract(approve)
+  }
+
   return (
     <>
       <br />
@@ -196,44 +267,82 @@ export function Dex() {
       <p className={'mt-4'}>Current Token 1 Balance: {token1Balance.data?.formatted}</p>
       <p>Current Token 2 Balance: {token2Balance.data?.formatted}</p>
 
-      <p className='text-lg mt-4'>Token 1</p>
+      <div className={'border-solid border-2 border-green-600 p-2 rounded-xl mt-2 mb-2'}>
+        <p className='text-xl'>Add Liquidity</p>
 
-      <input type='text' value={token1Address} className='input input-bordered input-primary w-full max-w-md' />
-      <input
-        type='number'
-        value={token1Input}
-        placeholder='0.0'
-        onChange={handleToken1InputChange}
-        className='input input-bordered input-secondary w-full max-w-xs mt-2'
-      />
+        <p className='text-lg mt-4'>Token 1</p>
+        <input type='text' value={token1Address} className='input input-bordered input-primary w-full max-w-md' />
+        <input
+          type='number'
+          value={token1Input}
+          placeholder='0.0'
+          onChange={handleToken1InputChange}
+          className='input input-bordered input-secondary w-full max-w-xs mt-2'
+        />
 
-      <br />
-      <br />
+        <br />
+        <br />
 
-      <p className='text-lg'>Token 2</p>
-      <input type='text' value={token2Address} className='input input-bordered input-primary w-full max-w-md' />
-      <input
-        type='number'
-        value={token2Input}
-        placeholder='0.0'
-        onChange={handleToken2InputChange}
-        className='input input-bordered input-secondary w-full max-w-xs mt-2'
-      />
+        <p className='text-lg'>Token 2</p>
+        <input type='text' value={token2Address} className='input input-bordered input-primary w-full max-w-md' />
+        <input
+          type='number'
+          value={token2Input}
+          placeholder='0.0'
+          onChange={handleToken2InputChange}
+          className='input input-bordered input-secondary w-full max-w-xs mt-2'
+        />
 
-      <br />
-      <br />
+        <br />
+        <br />
 
-      {approveRequired && (
-        <button onClick={approveTokens} className='btn btn-accent mr-4'>
+        {approveRequired && (
+          <button onClick={approveTokens} className='btn btn-accent mr-4'>
+            Approve
+          </button>
+        )}
+
+        <button onClick={addLiquidity} className='btn btn-secondary mr-4'>
+          Add Liquidity
+        </button>
+      </div>
+
+      <div className={'border-solid border-2 border-cyan-700 p-2 rounded-xl mt-8 mb-2'}>
+        <p className='text-xl mb-4'>Swap Tokens</p>
+
+        <p className='text-lg mt-4'>Token 1</p>
+        <input type='text' value={token1Address} className='input input-bordered input-primary w-full max-w-md' />
+        <input
+          type='number'
+          value={token1SwapInput}
+          placeholder='0.0'
+          onChange={handleToken1SwapInputChange}
+          className='input input-bordered input-secondary w-full max-w-xs mt-2'
+        />
+
+        <br />
+        <br />
+
+        <p className='text-lg'>Token 2</p>
+        <input type='text' value={token2Address} className='input input-bordered input-primary w-full max-w-md' />
+        <input
+          type='number'
+          value={token2SwapInput}
+          placeholder='0.0'
+          onChange={handleToken2SwapInputChange}
+          className='input input-bordered input-secondary w-full max-w-xs mt-2'
+        />
+
+        {/*{approveRequired && (*/}
+        <button onClick={approveTokenForSwap} className='btn btn-accent mr-4 mt-2'>
           Approve
         </button>
-      )}
+        {/*)}*/}
 
-      <button onClick={addLiquidity} className='btn btn-secondary mr-4'>
-        Add Liquidity
-      </button>
-
-      <button className='btn btn-primary'>Swap</button>
+        <button onClick={swapTokens} className='btn btn-primary'>
+          Swap
+        </button>
+      </div>
     </>
   )
 }

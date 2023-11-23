@@ -4599,6 +4599,243 @@ export const selfPermitABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// SwapRouter
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const swapRouterABI = [
+  {
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+    inputs: [
+      { name: '_factory', internalType: 'address', type: 'address' },
+      { name: '_WETH9', internalType: 'address', type: 'address' },
+    ],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'WETH9',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct ISwapRouter.ExactInputParams',
+        type: 'tuple',
+        components: [
+          { name: 'path', internalType: 'bytes', type: 'bytes' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOutMinimum', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'exactInput',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct ISwapRouter.ExactInputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOutMinimum', internalType: 'uint256', type: 'uint256' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'exactInputSingle',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct ISwapRouter.ExactOutputParams',
+        type: 'tuple',
+        components: [
+          { name: 'path', internalType: 'bytes', type: 'bytes' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountInMaximum', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'exactOutput',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct ISwapRouter.ExactOutputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountInMaximum', internalType: 'uint256', type: 'uint256' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'exactOutputSingle',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'data', internalType: 'bytes[]', type: 'bytes[]' }],
+    name: 'multicall',
+    outputs: [{ name: 'results', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
+  { stateMutability: 'payable', type: 'function', inputs: [], name: 'refundETH', outputs: [] },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermit',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'nonce', internalType: 'uint256', type: 'uint256' },
+      { name: 'expiry', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermitAllowed',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'nonce', internalType: 'uint256', type: 'uint256' },
+      { name: 'expiry', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermitAllowedIfNecessary',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermitIfNecessary',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepTokenWithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'amount0Delta', internalType: 'int256', type: 'int256' },
+      { name: 'amount1Delta', internalType: 'int256', type: 'int256' },
+      { name: '_data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'uniswapV3SwapCallback',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'receive' },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // USDC
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4808,7 +5045,7 @@ export function writeErc20<TFunctionName extends string>(
  */
 export function prepareWriteErc20<
   TAbi extends readonly unknown[] = typeof erc20ABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: erc20ABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -4848,7 +5085,7 @@ export function writeErc721<TFunctionName extends string>(
  */
 export function prepareWriteErc721<
   TAbi extends readonly unknown[] = typeof erc721ABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: erc721ABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -4868,7 +5105,7 @@ export function getErc721Permit(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readErc721Permit<
   TAbi extends readonly unknown[] = typeof erc721PermitABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: erc721PermitABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -4892,7 +5129,7 @@ export function writeErc721Permit<TFunctionName extends string>(
  */
 export function prepareWriteErc721Permit<
   TAbi extends readonly unknown[] = typeof erc721PermitABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: erc721PermitABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -4912,7 +5149,7 @@ export function getIerc1271(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readIerc1271<
   TAbi extends readonly unknown[] = typeof ierc1271ABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: ierc1271ABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -4965,7 +5202,7 @@ export function writeIerc20<TFunctionName extends string>(
  */
 export function prepareWriteIerc20<
   TAbi extends readonly unknown[] = typeof ierc20ABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc20ABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -4985,7 +5222,7 @@ export function getIerc20Metadata(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readIerc20Metadata<
   TAbi extends readonly unknown[] = typeof ierc20MetadataABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: ierc20MetadataABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -5009,7 +5246,7 @@ export function writeIerc20Metadata<TFunctionName extends string>(
  */
 export function prepareWriteIerc20Metadata<
   TAbi extends readonly unknown[] = typeof ierc20MetadataABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc20MetadataABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5029,7 +5266,7 @@ export function getIerc20Permit(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readIerc20Permit<
   TAbi extends readonly unknown[] = typeof ierc20PermitABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: ierc20PermitABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -5053,7 +5290,7 @@ export function writeIerc20Permit<TFunctionName extends string>(
  */
 export function prepareWriteIerc20Permit<
   TAbi extends readonly unknown[] = typeof ierc20PermitABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc20PermitABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5087,7 +5324,7 @@ export function writeIerc20PermitAllowed<TFunctionName extends string>(
  */
 export function prepareWriteIerc20PermitAllowed<
   TAbi extends readonly unknown[] = typeof ierc20PermitAllowedABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc20PermitAllowedABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5127,7 +5364,7 @@ export function writeIerc721<TFunctionName extends string>(
  */
 export function prepareWriteIerc721<
   TAbi extends readonly unknown[] = typeof ierc721ABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc721ABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5147,7 +5384,7 @@ export function getIerc721Enumerable(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readIerc721Enumerable<
   TAbi extends readonly unknown[] = typeof ierc721EnumerableABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: ierc721EnumerableABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -5171,7 +5408,7 @@ export function writeIerc721Enumerable<TFunctionName extends string>(
  */
 export function prepareWriteIerc721Enumerable<
   TAbi extends readonly unknown[] = typeof ierc721EnumerableABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc721EnumerableABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5191,7 +5428,7 @@ export function getIerc721Metadata(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readIerc721Metadata<
   TAbi extends readonly unknown[] = typeof ierc721MetadataABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: ierc721MetadataABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -5215,7 +5452,7 @@ export function writeIerc721Metadata<TFunctionName extends string>(
  */
 export function prepareWriteIerc721Metadata<
   TAbi extends readonly unknown[] = typeof ierc721MetadataABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc721MetadataABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5235,7 +5472,7 @@ export function getIerc721Permit(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readIerc721Permit<
   TAbi extends readonly unknown[] = typeof ierc721PermitABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: ierc721PermitABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -5259,7 +5496,7 @@ export function writeIerc721Permit<TFunctionName extends string>(
  */
 export function prepareWriteIerc721Permit<
   TAbi extends readonly unknown[] = typeof ierc721PermitABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc721PermitABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5293,7 +5530,7 @@ export function writeIerc721Receiver<TFunctionName extends string>(
  */
 export function prepareWriteIerc721Receiver<
   TAbi extends readonly unknown[] = typeof ierc721ReceiverABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ierc721ReceiverABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5327,7 +5564,7 @@ export function writeIMulticall<TFunctionName extends string>(
  */
 export function prepareWriteIMulticall<
   TAbi extends readonly unknown[] = typeof iMulticallABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iMulticallABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5347,7 +5584,7 @@ export function getINonfungiblePositionManager(config: Omit<GetContractArgs, 'ab
  */
 export function readINonfungiblePositionManager<
   TAbi extends readonly unknown[] = typeof iNonfungiblePositionManagerABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: iNonfungiblePositionManagerABI, ...config } as unknown as ReadContractConfig<
     TAbi,
@@ -5374,7 +5611,7 @@ export function writeINonfungiblePositionManager<TFunctionName extends string>(
  */
 export function prepareWriteINonfungiblePositionManager<
   TAbi extends readonly unknown[] = typeof iNonfungiblePositionManagerABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({
     abi: iNonfungiblePositionManagerABI,
@@ -5394,7 +5631,7 @@ export function getINonfungibleTokenPositionDescriptor(config: Omit<GetContractA
  */
 export function readINonfungibleTokenPositionDescriptor<
   TAbi extends readonly unknown[] = typeof iNonfungibleTokenPositionDescriptorABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: iNonfungibleTokenPositionDescriptorABI, ...config } as unknown as ReadContractConfig<
     TAbi,
@@ -5414,7 +5651,7 @@ export function getIPeripheryImmutableState(config: Omit<GetContractArgs, 'abi'>
  */
 export function readIPeripheryImmutableState<
   TAbi extends readonly unknown[] = typeof iPeripheryImmutableStateABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: iPeripheryImmutableStateABI, ...config } as unknown as ReadContractConfig<
     TAbi,
@@ -5448,7 +5685,7 @@ export function writeIPeripheryPayments<TFunctionName extends string>(
  */
 export function prepareWriteIPeripheryPayments<
   TAbi extends readonly unknown[] = typeof iPeripheryPaymentsABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iPeripheryPaymentsABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5482,7 +5719,7 @@ export function writeIPeripheryPaymentsWithFee<TFunctionName extends string>(
  */
 export function prepareWriteIPeripheryPaymentsWithFee<
   TAbi extends readonly unknown[] = typeof iPeripheryPaymentsWithFeeABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iPeripheryPaymentsWithFeeABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5516,7 +5753,7 @@ export function writeIPoolInitializer<TFunctionName extends string>(
  */
 export function prepareWriteIPoolInitializer<
   TAbi extends readonly unknown[] = typeof iPoolInitializerABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iPoolInitializerABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5547,7 +5784,7 @@ export function writeIQuoter<TFunctionName extends string>(
  */
 export function prepareWriteIQuoter<
   TAbi extends readonly unknown[] = typeof iQuoterABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iQuoterABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5581,7 +5818,7 @@ export function writeIQuoterV2<TFunctionName extends string>(
  */
 export function prepareWriteIQuoterV2<
   TAbi extends readonly unknown[] = typeof iQuoterV2ABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iQuoterV2ABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5615,7 +5852,7 @@ export function writeISelfPermit<TFunctionName extends string>(
  */
 export function prepareWriteISelfPermit<
   TAbi extends readonly unknown[] = typeof iSelfPermitABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iSelfPermitABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5649,7 +5886,7 @@ export function writeISwapRouter<TFunctionName extends string>(
  */
 export function prepareWriteISwapRouter<
   TAbi extends readonly unknown[] = typeof iSwapRouterABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iSwapRouterABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5669,7 +5906,7 @@ export function getITickLens(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readITickLens<
   TAbi extends readonly unknown[] = typeof iTickLensABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: iTickLensABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -5686,7 +5923,7 @@ export function getIUniswapV3Factory(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readIUniswapV3Factory<
   TAbi extends readonly unknown[] = typeof iUniswapV3FactoryABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: iUniswapV3FactoryABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -5710,7 +5947,7 @@ export function writeIUniswapV3Factory<TFunctionName extends string>(
  */
 export function prepareWriteIUniswapV3Factory<
   TAbi extends readonly unknown[] = typeof iUniswapV3FactoryABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iUniswapV3FactoryABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5744,7 +5981,7 @@ export function writeIUniswapV3MintCallback<TFunctionName extends string>(
  */
 export function prepareWriteIUniswapV3MintCallback<
   TAbi extends readonly unknown[] = typeof iUniswapV3MintCallbackABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iUniswapV3MintCallbackABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5764,7 +6001,7 @@ export function getIUniswapV3Pool(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readIUniswapV3Pool<
   TAbi extends readonly unknown[] = typeof iUniswapV3PoolABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: iUniswapV3PoolABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -5788,7 +6025,7 @@ export function writeIUniswapV3Pool<TFunctionName extends string>(
  */
 export function prepareWriteIUniswapV3Pool<
   TAbi extends readonly unknown[] = typeof iUniswapV3PoolABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iUniswapV3PoolABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5822,7 +6059,7 @@ export function writeIUniswapV3PoolActions<TFunctionName extends string>(
  */
 export function prepareWriteIUniswapV3PoolActions<
   TAbi extends readonly unknown[] = typeof iUniswapV3PoolActionsABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iUniswapV3PoolActionsABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5842,7 +6079,7 @@ export function getIUniswapV3PoolDerivedState(config: Omit<GetContractArgs, 'abi
  */
 export function readIUniswapV3PoolDerivedState<
   TAbi extends readonly unknown[] = typeof iUniswapV3PoolDerivedStateABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: iUniswapV3PoolDerivedStateABI, ...config } as unknown as ReadContractConfig<
     TAbi,
@@ -5869,7 +6106,7 @@ export function getIUniswapV3PoolImmutables(config: Omit<GetContractArgs, 'abi'>
  */
 export function readIUniswapV3PoolImmutables<
   TAbi extends readonly unknown[] = typeof iUniswapV3PoolImmutablesABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: iUniswapV3PoolImmutablesABI, ...config } as unknown as ReadContractConfig<
     TAbi,
@@ -5903,7 +6140,7 @@ export function writeIUniswapV3PoolOwnerActions<TFunctionName extends string>(
  */
 export function prepareWriteIUniswapV3PoolOwnerActions<
   TAbi extends readonly unknown[] = typeof iUniswapV3PoolOwnerActionsABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({
     abi: iUniswapV3PoolOwnerActionsABI,
@@ -5923,7 +6160,7 @@ export function getIUniswapV3PoolState(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readIUniswapV3PoolState<
   TAbi extends readonly unknown[] = typeof iUniswapV3PoolStateABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: iUniswapV3PoolStateABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -5954,7 +6191,7 @@ export function writeIUniswapV3SwapCallback<TFunctionName extends string>(
  */
 export function prepareWriteIUniswapV3SwapCallback<
   TAbi extends readonly unknown[] = typeof iUniswapV3SwapCallbackABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iUniswapV3SwapCallbackABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -5988,7 +6225,7 @@ export function writeIv3Migrator<TFunctionName extends string>(
  */
 export function prepareWriteIv3Migrator<
   TAbi extends readonly unknown[] = typeof iv3MigratorABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iv3MigratorABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -6028,7 +6265,7 @@ export function writeIweth9<TFunctionName extends string>(
  */
 export function prepareWriteIweth9<
   TAbi extends readonly unknown[] = typeof iweth9ABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iweth9ABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -6048,7 +6285,7 @@ export function getLiquidityManagement(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readLiquidityManagement<
   TAbi extends readonly unknown[] = typeof liquidityManagementABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: liquidityManagementABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -6072,7 +6309,7 @@ export function writeLiquidityManagement<TFunctionName extends string>(
  */
 export function prepareWriteLiquidityManagement<
   TAbi extends readonly unknown[] = typeof liquidityManagementABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: liquidityManagementABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -6114,7 +6351,7 @@ export function readMessage<TAbi extends readonly unknown[] = typeof messageABI,
 export function writeMessage<
   TFunctionName extends string,
   TMode extends WriteContractMode,
-  TChainId extends number = keyof typeof messageAddress,
+  TChainId extends number = keyof typeof messageAddress
 >(
   config:
     | (Omit<WriteContractPreparedArgs<typeof messageABI, TFunctionName>, 'abi' | 'address'> & {
@@ -6140,7 +6377,7 @@ export function writeMessage<
  */
 export function prepareWriteMessage<
   TAbi extends readonly unknown[] = typeof messageABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(
   config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi' | 'address'> & {
     chainId?: keyof typeof messageAddress
@@ -6179,7 +6416,7 @@ export function writeMulticall<TFunctionName extends string>(
  */
 export function prepareWriteMulticall<
   TAbi extends readonly unknown[] = typeof multicallABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: multicallABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -6199,7 +6436,7 @@ export function getNftDescriptor(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readNftDescriptor<
   TAbi extends readonly unknown[] = typeof nftDescriptorABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: nftDescriptorABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -6236,7 +6473,7 @@ export function writeNexthFt<TFunctionName extends string>(
  */
 export function prepareWriteNexthFt<
   TAbi extends readonly unknown[] = typeof nexthFtABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: nexthFtABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -6256,7 +6493,7 @@ export function getNonfungiblePositionManager(config: Omit<GetContractArgs, 'abi
  */
 export function readNonfungiblePositionManager<
   TAbi extends readonly unknown[] = typeof nonfungiblePositionManagerABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: nonfungiblePositionManagerABI, ...config } as unknown as ReadContractConfig<
     TAbi,
@@ -6283,7 +6520,7 @@ export function writeNonfungiblePositionManager<TFunctionName extends string>(
  */
 export function prepareWriteNonfungiblePositionManager<
   TAbi extends readonly unknown[] = typeof nonfungiblePositionManagerABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({
     abi: nonfungiblePositionManagerABI,
@@ -6323,7 +6560,7 @@ export function writeOwnable<TFunctionName extends string>(
  */
 export function prepareWriteOwnable<
   TAbi extends readonly unknown[] = typeof ownableABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: ownableABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -6343,7 +6580,7 @@ export function getPeripheryImmutableState(config: Omit<GetContractArgs, 'abi'>)
  */
 export function readPeripheryImmutableState<
   TAbi extends readonly unknown[] = typeof peripheryImmutableStateABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: peripheryImmutableStateABI, ...config } as unknown as ReadContractConfig<
     TAbi,
@@ -6363,7 +6600,7 @@ export function getPeripheryPayments(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readPeripheryPayments<
   TAbi extends readonly unknown[] = typeof peripheryPaymentsABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: peripheryPaymentsABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -6387,7 +6624,7 @@ export function writePeripheryPayments<TFunctionName extends string>(
  */
 export function prepareWritePeripheryPayments<
   TAbi extends readonly unknown[] = typeof peripheryPaymentsABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: peripheryPaymentsABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -6407,7 +6644,7 @@ export function getPeripheryPaymentsWithFee(config: Omit<GetContractArgs, 'abi'>
  */
 export function readPeripheryPaymentsWithFee<
   TAbi extends readonly unknown[] = typeof peripheryPaymentsWithFeeABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: peripheryPaymentsWithFeeABI, ...config } as unknown as ReadContractConfig<
     TAbi,
@@ -6434,7 +6671,7 @@ export function writePeripheryPaymentsWithFee<TFunctionName extends string>(
  */
 export function prepareWritePeripheryPaymentsWithFee<
   TAbi extends readonly unknown[] = typeof peripheryPaymentsWithFeeABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: peripheryPaymentsWithFeeABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -6454,7 +6691,7 @@ export function getPoolInitializer(config: Omit<GetContractArgs, 'abi'>) {
  */
 export function readPoolInitializer<
   TAbi extends readonly unknown[] = typeof poolInitializerABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: poolInitializerABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
@@ -6478,7 +6715,7 @@ export function writePoolInitializer<TFunctionName extends string>(
  */
 export function prepareWritePoolInitializer<
   TAbi extends readonly unknown[] = typeof poolInitializerABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: poolInitializerABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
@@ -6512,9 +6749,53 @@ export function writeSelfPermit<TFunctionName extends string>(
  */
 export function prepareWriteSelfPermit<
   TAbi extends readonly unknown[] = typeof selfPermitABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: selfPermitABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link swapRouterABI}__.
+ */
+export function getSwapRouter(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: swapRouterABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link swapRouterABI}__.
+ */
+export function readSwapRouter<
+  TAbi extends readonly unknown[] = typeof swapRouterABI,
+  TFunctionName extends string = string
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: swapRouterABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link swapRouterABI}__.
+ */
+export function writeSwapRouter<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof swapRouterABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof swapRouterABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: swapRouterABI, ...config } as unknown as WriteContractArgs<
+    typeof swapRouterABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link swapRouterABI}__.
+ */
+export function prepareWriteSwapRouter<
+  TAbi extends readonly unknown[] = typeof swapRouterABI,
+  TFunctionName extends string = string
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: swapRouterABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
     TFunctionName
   >)
@@ -6552,7 +6833,7 @@ export function writeUsdc<TFunctionName extends string>(
  */
 export function prepareWriteUsdc<
   TAbi extends readonly unknown[] = typeof usdcABI,
-  TFunctionName extends string = string,
+  TFunctionName extends string = string
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: usdcABI, ...config } as unknown as PrepareWriteContractConfig<TAbi, TFunctionName>)
 }
