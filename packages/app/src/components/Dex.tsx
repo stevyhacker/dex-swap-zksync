@@ -199,20 +199,23 @@ export function Dex() {
     }
   }
 
+  async function approveTokenForSwap() {
+    if (walletClient == undefined || address == undefined) {
+      alert('Connect your wallet first')
+      return
+    }
+
+    const { request: approve } = await publicClient.simulateContract({
+      account: address,
+      abi: usdcABI,
+      address: token1Address as Address,
+      functionName: 'approve',
+      args: [uniswapRouter, parseUnits(token1SwapInput.toString(), 6)],
+    })
+    walletClient.writeContract(approve)
+  }
+
   async function swapTokens() {
-    // ISwapRouter.ExactInputSingleParams memory params = ISwapRouter
-    //   .ExactInputSingleParams({
-    //     tokenIn: tokenIn,
-    //     tokenOut: tokenOut,
-    //     fee: poolFee,
-    //     recipient: msg.sender,
-    //     deadline: block.timestamp,
-    //     amountIn: amountIn,
-    //     amountOutMinimum: 0,
-    //     sqrtPriceLimitX96: 0
-    //   });
-    //
-    // amountOut = router.exactInputSingle(params);
     if (walletClient != undefined && address != undefined) {
       const { request: swapTokens } = await publicClient.simulateContract({
         account: address,
@@ -235,22 +238,6 @@ export function Dex() {
       walletClient.writeContract(swapTokens)
       console.log('Tokens swapped')
     }
-  }
-
-  async function approveTokenForSwap() {
-    if (walletClient == undefined || address == undefined) {
-      alert('Connect your wallet first')
-      return
-    }
-
-    const { request: approve } = await publicClient.simulateContract({
-      account: address,
-      abi: usdcABI,
-      address: token1Address as Address,
-      functionName: 'approve',
-      args: [uniswapRouter, parseUnits(token1SwapInput.toString(), 6)],
-    })
-    walletClient.writeContract(approve)
   }
 
   return (
@@ -325,19 +312,17 @@ export function Dex() {
 
         <p className='text-lg'>Token 2</p>
         <input type='text' value={token2Address} className='input input-bordered input-primary w-full max-w-md' />
-        <input
-          type='number'
-          value={token2SwapInput}
-          placeholder='0.0'
-          onChange={handleToken2SwapInputChange}
-          className='input input-bordered input-secondary w-full max-w-xs mt-2'
-        />
+        {/*<input*/}
+        {/*  type='number'*/}
+        {/*  value={token2SwapInput}*/}
+        {/*  placeholder='0.0'*/}
+        {/*  onChange={handleToken2SwapInputChange}*/}
+        {/*  className='input input-bordered input-secondary w-full max-w-xs mt-2'*/}
+        {/*/>*/}
 
-        {/*{approveRequired && (*/}
-        <button onClick={approveTokenForSwap} className='btn btn-accent mr-4 mt-2'>
+        <button onClick={approveTokenForSwap} className='btn btn-accent mr-4 ml-2 mt-2'>
           Approve
         </button>
-        {/*)}*/}
 
         <button onClick={swapTokens} className='btn btn-primary'>
           Swap
