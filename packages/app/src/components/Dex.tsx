@@ -31,6 +31,7 @@ export function Dex() {
   const [token1Allowance, setToken1Allowance] = useState(0n)
   const [token2Allowance, setToken2Allowance] = useState(0n)
   const [approveRequired, setApproveRequired] = useState(true)
+  const [approveSwapRequired, setApproveSwapRequired] = useState(true)
 
   useEffect(() => {
     async function checkApprovals() {
@@ -52,6 +53,20 @@ export function Dex() {
       })
       setToken1Allowance(allowance2)
 
+      const allowance3 = await publicClient.readContract({
+        account: address,
+        abi: usdcABI,
+        address: token1Address as Address,
+        functionName: 'allowance',
+        args: [address as Address, uniswapRouter],
+      })
+
+      if (allowance3 >= parseUnits(token1SwapInput.toString(), 6)) {
+        setApproveSwapRequired(false)
+      } else {
+        setApproveSwapRequired(true)
+      }
+
       if (allowance >= parseUnits(token1Input.toString(), 6) && allowance2 >= parseUnits(token2Input.toString(), 6)) {
         setApproveRequired(false)
       } else {
@@ -60,7 +75,7 @@ export function Dex() {
     }
 
     checkApprovals()
-  }, [address, publicClient, token1Input, token2Input, token1Allowance, token2Allowance])
+  }, [address, publicClient, token1Input, token2Input, token1Allowance, token2Allowance, token1SwapInput])
 
   const handleToken1InputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setToken1Input(Number(event.target.value))
@@ -146,6 +161,8 @@ export function Dex() {
         token2Allowance >= parseUnits(token2Input.toString(), 6)
       ) {
         setApproveRequired(false)
+      } else {
+        setApproveRequired(true)
       }
 
       console.log('Tokens approved')
@@ -319,10 +336,13 @@ export function Dex() {
         {/*  onChange={handleToken2SwapInputChange}*/}
         {/*  className='input input-bordered input-secondary w-full max-w-xs mt-2'*/}
         {/*/>*/}
-
-        <button onClick={approveTokenForSwap} className='btn btn-accent mr-4 ml-2 mt-2'>
-          Approve
-        </button>
+        <br />
+        <br />
+        {approveSwapRequired && (
+          <button onClick={approveTokenForSwap} className='btn btn-accent mr-4 ml-2 mt-2'>
+            Approve
+          </button>
+        )}
 
         <button onClick={swapTokens} className='btn btn-primary'>
           Swap
