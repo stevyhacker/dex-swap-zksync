@@ -13,6 +13,115 @@ import {
 } from 'wagmi/actions'
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ApproveAndCall
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const approveAndCallABI = [
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveMax',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveMaxMinusOne',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveZeroThenMax',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveZeroThenMaxMinusOne',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'data', internalType: 'bytes', type: 'bytes' }],
+    name: 'callPositionManager',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factoryV2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'getApprovalType',
+    outputs: [{ name: '', internalType: 'enum IApproveAndCall.ApprovalType', type: 'uint8' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IApproveAndCall.IncreaseLiquidityParams',
+        type: 'tuple',
+        components: [
+          { name: 'token0', internalType: 'address', type: 'address' },
+          { name: 'token1', internalType: 'address', type: 'address' },
+          { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount0Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount1Min', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'increaseLiquidity',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IApproveAndCall.MintParams',
+        type: 'tuple',
+        components: [
+          { name: 'token0', internalType: 'address', type: 'address' },
+          { name: 'token1', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'tickLower', internalType: 'int24', type: 'int24' },
+          { name: 'tickUpper', internalType: 'int24', type: 'int24' },
+          { name: 'amount0Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount1Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+        ],
+      },
+    ],
+    name: 'mint',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'positionManager',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ERC165
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -552,6 +661,101 @@ export const erc721PermitABI = [
     ],
     name: 'transferFrom',
     outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IApproveAndCall
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iApproveAndCallABI = [
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveMax',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveMaxMinusOne',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveZeroThenMax',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveZeroThenMaxMinusOne',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'data', internalType: 'bytes', type: 'bytes' }],
+    name: 'callPositionManager',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'getApprovalType',
+    outputs: [{ name: '', internalType: 'enum IApproveAndCall.ApprovalType', type: 'uint8' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IApproveAndCall.IncreaseLiquidityParams',
+        type: 'tuple',
+        components: [
+          { name: 'token0', internalType: 'address', type: 'address' },
+          { name: 'token1', internalType: 'address', type: 'address' },
+          { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount0Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount1Min', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'increaseLiquidity',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IApproveAndCall.MintParams',
+        type: 'tuple',
+        components: [
+          { name: 'token0', internalType: 'address', type: 'address' },
+          { name: 'token1', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'tickLower', internalType: 'int24', type: 'int24' },
+          { name: 'tickUpper', internalType: 'int24', type: 'int24' },
+          { name: 'amount0Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount1Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+        ],
+      },
+    ],
+    name: 'mint',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
   },
 ] as const
 
@@ -1439,10 +1643,130 @@ export const ierc721ReceiverABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IImmutableState
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iImmutableStateABI = [
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factoryV2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'positionManager',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IMixedRouteQuoterV1
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iMixedRouteQuoterV1ABI = [
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+      { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'quoteExactInput',
+    outputs: [
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+      { name: 'v3SqrtPriceX96AfterList', internalType: 'uint160[]', type: 'uint160[]' },
+      { name: 'v3InitializedTicksCrossedList', internalType: 'uint32[]', type: 'uint32[]' },
+      { name: 'v3SwapGasEstimate', internalType: 'uint256', type: 'uint256' },
+    ],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IMixedRouteQuoterV1.QuoteExactInputSingleV2Params',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'quoteExactInputSingleV2',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IMixedRouteQuoterV1.QuoteExactInputSingleV3Params',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'quoteExactInputSingleV3',
+    outputs: [
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+      { name: 'sqrtPriceX96After', internalType: 'uint160', type: 'uint160' },
+      { name: 'initializedTicksCrossed', internalType: 'uint32', type: 'uint32' },
+      { name: 'gasEstimate', internalType: 'uint256', type: 'uint256' },
+    ],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IMulticall
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const iMulticallABI = [
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'data', internalType: 'bytes[]', type: 'bytes[]' }],
+    name: 'multicall',
+    outputs: [{ name: 'results', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IMulticallExtended
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iMulticallExtendedABI = [
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'previousBlockhash', internalType: 'bytes32', type: 'bytes32' },
+      { name: 'data', internalType: 'bytes[]', type: 'bytes[]' },
+    ],
+    name: 'multicall',
+    outputs: [{ name: 'results', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes[]', type: 'bytes[]' },
+    ],
+    name: 'multicall',
+    outputs: [{ name: 'results', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
   {
     stateMutability: 'payable',
     type: 'function',
@@ -1881,6 +2205,36 @@ export const iNonfungibleTokenPositionDescriptorABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IOracleSlippage
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iOracleSlippageABI = [
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'paths', internalType: 'bytes[]', type: 'bytes[]' },
+      { name: 'amounts', internalType: 'uint128[]', type: 'uint128[]' },
+      { name: 'maximumTickDivergence', internalType: 'uint24', type: 'uint24' },
+      { name: 'secondsAgo', internalType: 'uint32', type: 'uint32' },
+    ],
+    name: 'checkOracleSlippage',
+    outputs: [],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+      { name: 'maximumTickDivergence', internalType: 'uint24', type: 'uint24' },
+      { name: 'secondsAgo', internalType: 'uint32', type: 'uint32' },
+    ],
+    name: 'checkOracleSlippage',
+    outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IPeripheryImmutableState
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1926,6 +2280,69 @@ export const iPeripheryPaymentsABI = [
       { name: 'recipient', internalType: 'address', type: 'address' },
     ],
     name: 'unwrapWETH9',
+    outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IPeripheryPaymentsExtended
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iPeripheryPaymentsExtendedABI = [
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'pull',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'function', inputs: [], name: 'refundETH', outputs: [] },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'amountMinimum', internalType: 'uint256', type: 'uint256' }],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'value', internalType: 'uint256', type: 'uint256' }],
+    name: 'wrapETH',
     outputs: [],
   },
 ] as const
@@ -1980,6 +2397,117 @@ export const iPeripheryPaymentsWithFeeABI = [
       { name: 'feeRecipient', internalType: 'address', type: 'address' },
     ],
     name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IPeripheryPaymentsWithFeeExtended
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iPeripheryPaymentsWithFeeExtendedABI = [
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'pull',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'function', inputs: [], name: 'refundETH', outputs: [] },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepTokenWithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepTokenWithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'amountMinimum', internalType: 'uint256', type: 'uint256' }],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'value', internalType: 'uint256', type: 'uint256' }],
+    name: 'wrapETH',
     outputs: [],
   },
 ] as const
@@ -2311,6 +2839,301 @@ export const iSwapRouterABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ISwapRouter02
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iSwapRouter02ABI = [
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveMax',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveMaxMinusOne',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveZeroThenMax',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveZeroThenMaxMinusOne',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'data', internalType: 'bytes', type: 'bytes' }],
+    name: 'callPositionManager',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactInputParams',
+        type: 'tuple',
+        components: [
+          { name: 'path', internalType: 'bytes', type: 'bytes' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOutMinimum', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'exactInput',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactInputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOutMinimum', internalType: 'uint256', type: 'uint256' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'exactInputSingle',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactOutputParams',
+        type: 'tuple',
+        components: [
+          { name: 'path', internalType: 'bytes', type: 'bytes' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountInMaximum', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'exactOutput',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactOutputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountInMaximum', internalType: 'uint256', type: 'uint256' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'exactOutputSingle',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'getApprovalType',
+    outputs: [{ name: '', internalType: 'enum IApproveAndCall.ApprovalType', type: 'uint8' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IApproveAndCall.IncreaseLiquidityParams',
+        type: 'tuple',
+        components: [
+          { name: 'token0', internalType: 'address', type: 'address' },
+          { name: 'token1', internalType: 'address', type: 'address' },
+          { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount0Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount1Min', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'increaseLiquidity',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IApproveAndCall.MintParams',
+        type: 'tuple',
+        components: [
+          { name: 'token0', internalType: 'address', type: 'address' },
+          { name: 'token1', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'tickLower', internalType: 'int24', type: 'int24' },
+          { name: 'tickUpper', internalType: 'int24', type: 'int24' },
+          { name: 'amount0Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount1Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+        ],
+      },
+    ],
+    name: 'mint',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'previousBlockhash', internalType: 'bytes32', type: 'bytes32' },
+      { name: 'data', internalType: 'bytes[]', type: 'bytes[]' },
+    ],
+    name: 'multicall',
+    outputs: [{ name: 'results', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes[]', type: 'bytes[]' },
+    ],
+    name: 'multicall',
+    outputs: [{ name: 'results', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'data', internalType: 'bytes[]', type: 'bytes[]' }],
+    name: 'multicall',
+    outputs: [{ name: 'results', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermit',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'nonce', internalType: 'uint256', type: 'uint256' },
+      { name: 'expiry', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermitAllowed',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'nonce', internalType: 'uint256', type: 'uint256' },
+      { name: 'expiry', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermitAllowedIfNecessary',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermitIfNecessary',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+      { name: 'amountOutMin', internalType: 'uint256', type: 'uint256' },
+      { name: 'path', internalType: 'address[]', type: 'address[]' },
+      { name: 'to', internalType: 'address', type: 'address' },
+    ],
+    name: 'swapExactTokensForTokens',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+      { name: 'amountInMax', internalType: 'uint256', type: 'uint256' },
+      { name: 'path', internalType: 'address[]', type: 'address[]' },
+      { name: 'to', internalType: 'address', type: 'address' },
+    ],
+    name: 'swapTokensForExactTokens',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'amount0Delta', internalType: 'int256', type: 'int256' },
+      { name: 'amount1Delta', internalType: 'int256', type: 'int256' },
+      { name: 'data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'uniswapV3SwapCallback',
+    outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ITickLens
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2335,6 +3158,343 @@ export const iTickLensABI = [
         ],
       },
     ],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ITokenValidator
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iTokenValidatorABI = [
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'tokens', internalType: 'address[]', type: 'address[]' },
+      { name: 'baseTokens', internalType: 'address[]', type: 'address[]' },
+      { name: 'amountToBorrow', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'batchValidate',
+    outputs: [{ name: '', internalType: 'enum ITokenValidator.Status[]', type: 'uint8[]' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'baseTokens', internalType: 'address[]', type: 'address[]' },
+      { name: 'amountToBorrow', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'validate',
+    outputs: [{ name: '', internalType: 'enum ITokenValidator.Status', type: 'uint8' }],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IUniswapV2Callee
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iUniswapV2CalleeABI = [
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'sender', internalType: 'address', type: 'address' },
+      { name: 'amount0', internalType: 'uint256', type: 'uint256' },
+      { name: 'amount1', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'uniswapV2Call',
+    outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IUniswapV2Pair
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iUniswapV2PairABI = [
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address', indexed: true },
+      { name: 'spender', internalType: 'address', type: 'address', indexed: true },
+      { name: 'value', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'Approval',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'sender', internalType: 'address', type: 'address', indexed: true },
+      { name: 'amount0', internalType: 'uint256', type: 'uint256', indexed: false },
+      { name: 'amount1', internalType: 'uint256', type: 'uint256', indexed: false },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+    ],
+    name: 'Burn',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'sender', internalType: 'address', type: 'address', indexed: true },
+      { name: 'amount0', internalType: 'uint256', type: 'uint256', indexed: false },
+      { name: 'amount1', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'Mint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'sender', internalType: 'address', type: 'address', indexed: true },
+      { name: 'amount0In', internalType: 'uint256', type: 'uint256', indexed: false },
+      { name: 'amount1In', internalType: 'uint256', type: 'uint256', indexed: false },
+      { name: 'amount0Out', internalType: 'uint256', type: 'uint256', indexed: false },
+      { name: 'amount1Out', internalType: 'uint256', type: 'uint256', indexed: false },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+    ],
+    name: 'Swap',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'reserve0', internalType: 'uint112', type: 'uint112', indexed: false },
+      { name: 'reserve1', internalType: 'uint112', type: 'uint112', indexed: false },
+    ],
+    name: 'Sync',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      { name: 'value', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'Transfer',
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'DOMAIN_SEPARATOR',
+    outputs: [{ name: '', internalType: 'bytes32', type: 'bytes32' }],
+  },
+  {
+    stateMutability: 'pure',
+    type: 'function',
+    inputs: [],
+    name: 'MINIMUM_LIQUIDITY',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'pure',
+    type: 'function',
+    inputs: [],
+    name: 'PERMIT_TYPEHASH',
+    outputs: [{ name: '', internalType: 'bytes32', type: 'bytes32' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'spender', internalType: 'address', type: 'address' },
+    ],
+    name: 'allowance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [{ name: 'to', internalType: 'address', type: 'address' }],
+    name: 'burn',
+    outputs: [
+      { name: 'amount0', internalType: 'uint256', type: 'uint256' },
+      { name: 'amount1', internalType: 'uint256', type: 'uint256' },
+    ],
+  },
+  {
+    stateMutability: 'pure',
+    type: 'function',
+    inputs: [],
+    name: 'decimals',
+    outputs: [{ name: '', internalType: 'uint8', type: 'uint8' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'getReserves',
+    outputs: [
+      { name: 'reserve0', internalType: 'uint112', type: 'uint112' },
+      { name: 'reserve1', internalType: 'uint112', type: 'uint112' },
+      { name: 'blockTimestampLast', internalType: 'uint32', type: 'uint32' },
+    ],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: '', internalType: 'address', type: 'address' },
+      { name: '', internalType: 'address', type: 'address' },
+    ],
+    name: 'initialize',
+    outputs: [],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'kLast',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [{ name: 'to', internalType: 'address', type: 'address' }],
+    name: 'mint',
+    outputs: [{ name: 'liquidity', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'pure',
+    type: 'function',
+    inputs: [],
+    name: 'name',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    name: 'nonces',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'permit',
+    outputs: [],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'price0CumulativeLast',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'price1CumulativeLast',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [{ name: 'to', internalType: 'address', type: 'address' }],
+    name: 'skim',
+    outputs: [],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'amount0Out', internalType: 'uint256', type: 'uint256' },
+      { name: 'amount1Out', internalType: 'uint256', type: 'uint256' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'swap',
+    outputs: [],
+  },
+  {
+    stateMutability: 'pure',
+    type: 'function',
+    inputs: [],
+    name: 'symbol',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+  },
+  { stateMutability: 'nonpayable', type: 'function', inputs: [], name: 'sync', outputs: [] },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'token0',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'token1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transfer',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFrom',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
   },
 ] as const
 
@@ -3272,6 +4432,37 @@ export const iUniswapV3SwapCallbackABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IV2SwapRouter
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iv2SwapRouterABI = [
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+      { name: 'amountOutMin', internalType: 'uint256', type: 'uint256' },
+      { name: 'path', internalType: 'address[]', type: 'address[]' },
+      { name: 'to', internalType: 'address', type: 'address' },
+    ],
+    name: 'swapExactTokensForTokens',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+      { name: 'amountInMax', internalType: 'uint256', type: 'uint256' },
+      { name: 'path', internalType: 'address[]', type: 'address[]' },
+      { name: 'to', internalType: 'address', type: 'address' },
+    ],
+    name: 'swapTokensForExactTokens',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IV3Migrator
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3382,6 +4573,131 @@ export const iv3MigratorABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IV3SwapRouter
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iv3SwapRouterABI = [
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactInputParams',
+        type: 'tuple',
+        components: [
+          { name: 'path', internalType: 'bytes', type: 'bytes' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOutMinimum', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'exactInput',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactInputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOutMinimum', internalType: 'uint256', type: 'uint256' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'exactInputSingle',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactOutputParams',
+        type: 'tuple',
+        components: [
+          { name: 'path', internalType: 'bytes', type: 'bytes' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountInMaximum', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'exactOutput',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactOutputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountInMaximum', internalType: 'uint256', type: 'uint256' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'exactOutputSingle',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'amount0Delta', internalType: 'int256', type: 'int256' },
+      { name: 'amount1Delta', internalType: 'int256', type: 'int256' },
+      { name: 'data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'uniswapV3SwapCallback',
+    outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IWETH
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iwethABI = [
+  { stateMutability: 'payable', type: 'function', inputs: [], name: 'deposit', outputs: [] },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transfer',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'withdraw',
+    outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IWETH9
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3468,6 +4784,27 @@ export const iweth9ABI = [
     inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     name: 'withdraw',
     outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ImmutableState
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const immutableStateABI = [
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factoryV2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'positionManager',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
   },
 ] as const
 
@@ -3573,10 +4910,150 @@ export const messageAddress = {
 export const messageConfig = { address: messageAddress, abi: messageABI } as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MixedRouteQuoterV1
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const mixedRouteQuoterV1ABI = [
+  {
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+    inputs: [
+      { name: '_factory', internalType: 'address', type: 'address' },
+      { name: '_factoryV2', internalType: 'address', type: 'address' },
+      { name: '_WETH9', internalType: 'address', type: 'address' },
+    ],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'WETH9',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factoryV2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+      { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'quoteExactInput',
+    outputs: [
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+      { name: 'v3SqrtPriceX96AfterList', internalType: 'uint160[]', type: 'uint160[]' },
+      { name: 'v3InitializedTicksCrossedList', internalType: 'uint32[]', type: 'uint32[]' },
+      { name: 'v3SwapGasEstimate', internalType: 'uint256', type: 'uint256' },
+    ],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IMixedRouteQuoterV1.QuoteExactInputSingleV2Params',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'quoteExactInputSingleV2',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IMixedRouteQuoterV1.QuoteExactInputSingleV3Params',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'quoteExactInputSingleV3',
+    outputs: [
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+      { name: 'sqrtPriceX96After', internalType: 'uint160', type: 'uint160' },
+      { name: 'initializedTicksCrossed', internalType: 'uint32', type: 'uint32' },
+      { name: 'gasEstimate', internalType: 'uint256', type: 'uint256' },
+    ],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'amount0Delta', internalType: 'int256', type: 'int256' },
+      { name: 'amount1Delta', internalType: 'int256', type: 'int256' },
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'uniswapV3SwapCallback',
+    outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Multicall
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const multicallABI = [
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'data', internalType: 'bytes[]', type: 'bytes[]' }],
+    name: 'multicall',
+    outputs: [{ name: 'results', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MulticallExtended
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const multicallExtendedABI = [
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'previousBlockhash', internalType: 'bytes32', type: 'bytes32' },
+      { name: 'data', internalType: 'bytes[]', type: 'bytes[]' },
+    ],
+    name: 'multicall',
+    outputs: [{ name: '', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes[]', type: 'bytes[]' },
+    ],
+    name: 'multicall',
+    outputs: [{ name: '', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
   {
     stateMutability: 'payable',
     type: 'function',
@@ -4338,6 +5815,50 @@ export const nonfungiblePositionManagerABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// OracleSlippage
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const oracleSlippageABI = [
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'WETH9',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'paths', internalType: 'bytes[]', type: 'bytes[]' },
+      { name: 'amounts', internalType: 'uint128[]', type: 'uint128[]' },
+      { name: 'maximumTickDivergence', internalType: 'uint24', type: 'uint24' },
+      { name: 'secondsAgo', internalType: 'uint32', type: 'uint32' },
+    ],
+    name: 'checkOracleSlippage',
+    outputs: [],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+      { name: 'maximumTickDivergence', internalType: 'uint24', type: 'uint24' },
+      { name: 'secondsAgo', internalType: 'uint32', type: 'uint32' },
+    ],
+    name: 'checkOracleSlippage',
+    outputs: [],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Ownable
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4434,6 +5955,84 @@ export const peripheryPaymentsABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// PeripheryPaymentsExtended
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const peripheryPaymentsExtendedABI = [
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'WETH9',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'pull',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'function', inputs: [], name: 'refundETH', outputs: [] },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'amountMinimum', internalType: 'uint256', type: 'uint256' }],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'value', internalType: 'uint256', type: 'uint256' }],
+    name: 'wrapETH',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'receive' },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PeripheryPaymentsWithFee
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4503,6 +6102,132 @@ export const peripheryPaymentsWithFeeABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// PeripheryPaymentsWithFeeExtended
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const peripheryPaymentsWithFeeExtendedABI = [
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'WETH9',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'pull',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'function', inputs: [], name: 'refundETH', outputs: [] },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepTokenWithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepTokenWithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'amountMinimum', internalType: 'uint256', type: 'uint256' }],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'value', internalType: 'uint256', type: 'uint256' }],
+    name: 'wrapETH',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'receive' },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PoolInitializer
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4532,6 +6257,212 @@ export const poolInitializerABI = [
     inputs: [],
     name: 'factory',
     outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Quoter
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const quoterABI = [
+  {
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+    inputs: [
+      { name: '_factory', internalType: 'address', type: 'address' },
+      { name: '_WETH9', internalType: 'address', type: 'address' },
+    ],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'WETH9',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+      { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'quoteExactInput',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'tokenIn', internalType: 'address', type: 'address' },
+      { name: 'tokenOut', internalType: 'address', type: 'address' },
+      { name: 'fee', internalType: 'uint24', type: 'uint24' },
+      { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+      { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+    ],
+    name: 'quoteExactInputSingle',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'quoteExactOutput',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'tokenIn', internalType: 'address', type: 'address' },
+      { name: 'tokenOut', internalType: 'address', type: 'address' },
+      { name: 'fee', internalType: 'uint24', type: 'uint24' },
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+      { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+    ],
+    name: 'quoteExactOutputSingle',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'amount0Delta', internalType: 'int256', type: 'int256' },
+      { name: 'amount1Delta', internalType: 'int256', type: 'int256' },
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'uniswapV3SwapCallback',
+    outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// QuoterV2
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const quoterV2ABI = [
+  {
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+    inputs: [
+      { name: '_factory', internalType: 'address', type: 'address' },
+      { name: '_WETH9', internalType: 'address', type: 'address' },
+    ],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'WETH9',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+      { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'quoteExactInput',
+    outputs: [
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+      { name: 'sqrtPriceX96AfterList', internalType: 'uint160[]', type: 'uint160[]' },
+      { name: 'initializedTicksCrossedList', internalType: 'uint32[]', type: 'uint32[]' },
+      { name: 'gasEstimate', internalType: 'uint256', type: 'uint256' },
+    ],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IQuoterV2.QuoteExactInputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'quoteExactInputSingle',
+    outputs: [
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+      { name: 'sqrtPriceX96After', internalType: 'uint160', type: 'uint160' },
+      { name: 'initializedTicksCrossed', internalType: 'uint32', type: 'uint32' },
+      { name: 'gasEstimate', internalType: 'uint256', type: 'uint256' },
+    ],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'quoteExactOutput',
+    outputs: [
+      { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+      { name: 'sqrtPriceX96AfterList', internalType: 'uint160[]', type: 'uint160[]' },
+      { name: 'initializedTicksCrossedList', internalType: 'uint32[]', type: 'uint32[]' },
+      { name: 'gasEstimate', internalType: 'uint256', type: 'uint256' },
+    ],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IQuoterV2.QuoteExactOutputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'amount', internalType: 'uint256', type: 'uint256' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'quoteExactOutputSingle',
+    outputs: [
+      { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+      { name: 'sqrtPriceX96After', internalType: 'uint160', type: 'uint160' },
+      { name: 'initializedTicksCrossed', internalType: 'uint32', type: 'uint32' },
+      { name: 'gasEstimate', internalType: 'uint256', type: 'uint256' },
+    ],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'amount0Delta', internalType: 'int256', type: 'int256' },
+      { name: 'amount1Delta', internalType: 'int256', type: 'int256' },
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'uniswapV3SwapCallback',
+    outputs: [],
   },
 ] as const
 
@@ -4836,6 +6767,530 @@ export const swapRouterABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// SwapRouter02
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const swapRouter02ABI = [
+  {
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+    inputs: [
+      { name: '_factoryV2', internalType: 'address', type: 'address' },
+      { name: 'factoryV3', internalType: 'address', type: 'address' },
+      { name: '_positionManager', internalType: 'address', type: 'address' },
+      { name: '_WETH9', internalType: 'address', type: 'address' },
+    ],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'WETH9',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveMax',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveMaxMinusOne',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveZeroThenMax',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'approveZeroThenMaxMinusOne',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'data', internalType: 'bytes', type: 'bytes' }],
+    name: 'callPositionManager',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'paths', internalType: 'bytes[]', type: 'bytes[]' },
+      { name: 'amounts', internalType: 'uint128[]', type: 'uint128[]' },
+      { name: 'maximumTickDivergence', internalType: 'uint24', type: 'uint24' },
+      { name: 'secondsAgo', internalType: 'uint32', type: 'uint32' },
+    ],
+    name: 'checkOracleSlippage',
+    outputs: [],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+      { name: 'maximumTickDivergence', internalType: 'uint24', type: 'uint24' },
+      { name: 'secondsAgo', internalType: 'uint32', type: 'uint32' },
+    ],
+    name: 'checkOracleSlippage',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactInputParams',
+        type: 'tuple',
+        components: [
+          { name: 'path', internalType: 'bytes', type: 'bytes' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOutMinimum', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'exactInput',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactInputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOutMinimum', internalType: 'uint256', type: 'uint256' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'exactInputSingle',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactOutputParams',
+        type: 'tuple',
+        components: [
+          { name: 'path', internalType: 'bytes', type: 'bytes' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountInMaximum', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'exactOutput',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactOutputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountInMaximum', internalType: 'uint256', type: 'uint256' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'exactOutputSingle',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factoryV2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'getApprovalType',
+    outputs: [{ name: '', internalType: 'enum IApproveAndCall.ApprovalType', type: 'uint8' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IApproveAndCall.IncreaseLiquidityParams',
+        type: 'tuple',
+        components: [
+          { name: 'token0', internalType: 'address', type: 'address' },
+          { name: 'token1', internalType: 'address', type: 'address' },
+          { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount0Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount1Min', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'increaseLiquidity',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IApproveAndCall.MintParams',
+        type: 'tuple',
+        components: [
+          { name: 'token0', internalType: 'address', type: 'address' },
+          { name: 'token1', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'tickLower', internalType: 'int24', type: 'int24' },
+          { name: 'tickUpper', internalType: 'int24', type: 'int24' },
+          { name: 'amount0Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'amount1Min', internalType: 'uint256', type: 'uint256' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+        ],
+      },
+    ],
+    name: 'mint',
+    outputs: [{ name: 'result', internalType: 'bytes', type: 'bytes' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'previousBlockhash', internalType: 'bytes32', type: 'bytes32' },
+      { name: 'data', internalType: 'bytes[]', type: 'bytes[]' },
+    ],
+    name: 'multicall',
+    outputs: [{ name: '', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes[]', type: 'bytes[]' },
+    ],
+    name: 'multicall',
+    outputs: [{ name: '', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'data', internalType: 'bytes[]', type: 'bytes[]' }],
+    name: 'multicall',
+    outputs: [{ name: 'results', internalType: 'bytes[]', type: 'bytes[]' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'positionManager',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'pull',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'function', inputs: [], name: 'refundETH', outputs: [] },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermit',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'nonce', internalType: 'uint256', type: 'uint256' },
+      { name: 'expiry', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermitAllowed',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'nonce', internalType: 'uint256', type: 'uint256' },
+      { name: 'expiry', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermitAllowedIfNecessary',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'deadline', internalType: 'uint256', type: 'uint256' },
+      { name: 'v', internalType: 'uint8', type: 'uint8' },
+      { name: 'r', internalType: 'bytes32', type: 'bytes32' },
+      { name: 's', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'selfPermitIfNecessary',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+      { name: 'amountOutMin', internalType: 'uint256', type: 'uint256' },
+      { name: 'path', internalType: 'address[]', type: 'address[]' },
+      { name: 'to', internalType: 'address', type: 'address' },
+    ],
+    name: 'swapExactTokensForTokens',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+      { name: 'amountInMax', internalType: 'uint256', type: 'uint256' },
+      { name: 'path', internalType: 'address[]', type: 'address[]' },
+      { name: 'to', internalType: 'address', type: 'address' },
+    ],
+    name: 'swapTokensForExactTokens',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepTokenWithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepTokenWithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'amount0Delta', internalType: 'int256', type: 'int256' },
+      { name: 'amount1Delta', internalType: 'int256', type: 'int256' },
+      { name: '_data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'uniswapV3SwapCallback',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'amountMinimum', internalType: 'uint256', type: 'uint256' }],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'value', internalType: 'uint256', type: 'uint256' }],
+    name: 'wrapETH',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'receive' },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// TokenValidator
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const tokenValidatorABI = [
+  {
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+    inputs: [
+      { name: '_factoryV2', internalType: 'address', type: 'address' },
+      { name: '_positionManager', internalType: 'address', type: 'address' },
+    ],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'tokens', internalType: 'address[]', type: 'address[]' },
+      { name: 'baseTokens', internalType: 'address[]', type: 'address[]' },
+      { name: 'amountToBorrow', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'batchValidate',
+    outputs: [{ name: 'isFotResults', internalType: 'enum ITokenValidator.Status[]', type: 'uint8[]' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factoryV2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'positionManager',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: '', internalType: 'address', type: 'address' },
+      { name: 'amount0', internalType: 'uint256', type: 'uint256' },
+      { name: '', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'uniswapV2Call',
+    outputs: [],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'baseTokens', internalType: 'address[]', type: 'address[]' },
+      { name: 'amountToBorrow', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'validate',
+    outputs: [{ name: '', internalType: 'enum ITokenValidator.Status', type: 'uint8' }],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // USDC
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4994,8 +7449,458 @@ export const usdcABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// V2SwapRouter
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const v2SwapRouterABI = [
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'WETH9',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factoryV2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'positionManager',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'pull',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'function', inputs: [], name: 'refundETH', outputs: [] },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+      { name: 'amountOutMin', internalType: 'uint256', type: 'uint256' },
+      { name: 'path', internalType: 'address[]', type: 'address[]' },
+      { name: 'to', internalType: 'address', type: 'address' },
+    ],
+    name: 'swapExactTokensForTokens',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+      { name: 'amountInMax', internalType: 'uint256', type: 'uint256' },
+      { name: 'path', internalType: 'address[]', type: 'address[]' },
+      { name: 'to', internalType: 'address', type: 'address' },
+    ],
+    name: 'swapTokensForExactTokens',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepTokenWithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepTokenWithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'amountMinimum', internalType: 'uint256', type: 'uint256' }],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'value', internalType: 'uint256', type: 'uint256' }],
+    name: 'wrapETH',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'receive' },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// V3SwapRouter
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const v3SwapRouterABI = [
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'WETH9',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'paths', internalType: 'bytes[]', type: 'bytes[]' },
+      { name: 'amounts', internalType: 'uint128[]', type: 'uint128[]' },
+      { name: 'maximumTickDivergence', internalType: 'uint24', type: 'uint24' },
+      { name: 'secondsAgo', internalType: 'uint32', type: 'uint32' },
+    ],
+    name: 'checkOracleSlippage',
+    outputs: [],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [
+      { name: 'path', internalType: 'bytes', type: 'bytes' },
+      { name: 'maximumTickDivergence', internalType: 'uint24', type: 'uint24' },
+      { name: 'secondsAgo', internalType: 'uint32', type: 'uint32' },
+    ],
+    name: 'checkOracleSlippage',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactInputParams',
+        type: 'tuple',
+        components: [
+          { name: 'path', internalType: 'bytes', type: 'bytes' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOutMinimum', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'exactInput',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactInputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountIn', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountOutMinimum', internalType: 'uint256', type: 'uint256' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'exactInputSingle',
+    outputs: [{ name: 'amountOut', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactOutputParams',
+        type: 'tuple',
+        components: [
+          { name: 'path', internalType: 'bytes', type: 'bytes' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountInMaximum', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    name: 'exactOutput',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      {
+        name: 'params',
+        internalType: 'struct IV3SwapRouter.ExactOutputSingleParams',
+        type: 'tuple',
+        components: [
+          { name: 'tokenIn', internalType: 'address', type: 'address' },
+          { name: 'tokenOut', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'recipient', internalType: 'address', type: 'address' },
+          { name: 'amountOut', internalType: 'uint256', type: 'uint256' },
+          { name: 'amountInMaximum', internalType: 'uint256', type: 'uint256' },
+          { name: 'sqrtPriceLimitX96', internalType: 'uint160', type: 'uint160' },
+        ],
+      },
+    ],
+    name: 'exactOutputSingle',
+    outputs: [{ name: 'amountIn', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'pull',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'function', inputs: [], name: 'refundETH', outputs: [] },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'sweepToken',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepTokenWithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'token', internalType: 'address', type: 'address' },
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'sweepTokenWithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [
+      { name: 'amount0Delta', internalType: 'int256', type: 'int256' },
+      { name: 'amount1Delta', internalType: 'int256', type: 'int256' },
+      { name: '_data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'uniswapV3SwapCallback',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'amountMinimum', internalType: 'uint256', type: 'uint256' }],
+    name: 'unwrapWETH9',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'recipient', internalType: 'address', type: 'address' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [
+      { name: 'amountMinimum', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeBips', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeRecipient', internalType: 'address', type: 'address' },
+    ],
+    name: 'unwrapWETH9WithFee',
+    outputs: [],
+  },
+  {
+    stateMutability: 'payable',
+    type: 'function',
+    inputs: [{ name: 'value', internalType: 'uint256', type: 'uint256' }],
+    name: 'wrapETH',
+    outputs: [],
+  },
+  { stateMutability: 'payable', type: 'receive' },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Core
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link approveAndCallABI}__.
+ */
+export function getApproveAndCall(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: approveAndCallABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link approveAndCallABI}__.
+ */
+export function readApproveAndCall<
+  TAbi extends readonly unknown[] = typeof approveAndCallABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: approveAndCallABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link approveAndCallABI}__.
+ */
+export function writeApproveAndCall<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof approveAndCallABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof approveAndCallABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: approveAndCallABI, ...config } as unknown as WriteContractArgs<
+    typeof approveAndCallABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link approveAndCallABI}__.
+ */
+export function prepareWriteApproveAndCall<
+  TAbi extends readonly unknown[] = typeof approveAndCallABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: approveAndCallABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
 
 /**
  * Wraps __{@link getContract}__ with `abi` set to __{@link erc165ABI}__.
@@ -5132,6 +8037,40 @@ export function prepareWriteErc721Permit<
   TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: erc721PermitABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iApproveAndCallABI}__.
+ */
+export function getIApproveAndCall(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iApproveAndCallABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iApproveAndCallABI}__.
+ */
+export function writeIApproveAndCall<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iApproveAndCallABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iApproveAndCallABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iApproveAndCallABI, ...config } as unknown as WriteContractArgs<
+    typeof iApproveAndCallABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iApproveAndCallABI}__.
+ */
+export function prepareWriteIApproveAndCall<
+  TAbi extends readonly unknown[] = typeof iApproveAndCallABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: iApproveAndCallABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
     TFunctionName
   >)
@@ -5539,6 +8478,57 @@ export function prepareWriteIerc721Receiver<
 }
 
 /**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iImmutableStateABI}__.
+ */
+export function getIImmutableState(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iImmutableStateABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link iImmutableStateABI}__.
+ */
+export function readIImmutableState<
+  TAbi extends readonly unknown[] = typeof iImmutableStateABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: iImmutableStateABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iMixedRouteQuoterV1ABI}__.
+ */
+export function getIMixedRouteQuoterV1(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iMixedRouteQuoterV1ABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iMixedRouteQuoterV1ABI}__.
+ */
+export function writeIMixedRouteQuoterV1<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iMixedRouteQuoterV1ABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iMixedRouteQuoterV1ABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iMixedRouteQuoterV1ABI, ...config } as unknown as WriteContractArgs<
+    typeof iMixedRouteQuoterV1ABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iMixedRouteQuoterV1ABI}__.
+ */
+export function prepareWriteIMixedRouteQuoterV1<
+  TAbi extends readonly unknown[] = typeof iMixedRouteQuoterV1ABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: iMixedRouteQuoterV1ABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
  * Wraps __{@link getContract}__ with `abi` set to __{@link iMulticallABI}__.
  */
 export function getIMulticall(config: Omit<GetContractArgs, 'abi'>) {
@@ -5567,6 +8557,40 @@ export function prepareWriteIMulticall<
   TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iMulticallABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iMulticallExtendedABI}__.
+ */
+export function getIMulticallExtended(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iMulticallExtendedABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iMulticallExtendedABI}__.
+ */
+export function writeIMulticallExtended<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iMulticallExtendedABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iMulticallExtendedABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iMulticallExtendedABI, ...config } as unknown as WriteContractArgs<
+    typeof iMulticallExtendedABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iMulticallExtendedABI}__.
+ */
+export function prepareWriteIMulticallExtended<
+  TAbi extends readonly unknown[] = typeof iMulticallExtendedABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: iMulticallExtendedABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
     TFunctionName
   >)
@@ -5640,6 +8664,23 @@ export function readINonfungibleTokenPositionDescriptor<
 }
 
 /**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iOracleSlippageABI}__.
+ */
+export function getIOracleSlippage(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iOracleSlippageABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link iOracleSlippageABI}__.
+ */
+export function readIOracleSlippage<
+  TAbi extends readonly unknown[] = typeof iOracleSlippageABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: iOracleSlippageABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
  * Wraps __{@link getContract}__ with `abi` set to __{@link iPeripheryImmutableStateABI}__.
  */
 export function getIPeripheryImmutableState(config: Omit<GetContractArgs, 'abi'>) {
@@ -5694,6 +8735,40 @@ export function prepareWriteIPeripheryPayments<
 }
 
 /**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iPeripheryPaymentsExtendedABI}__.
+ */
+export function getIPeripheryPaymentsExtended(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iPeripheryPaymentsExtendedABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iPeripheryPaymentsExtendedABI}__.
+ */
+export function writeIPeripheryPaymentsExtended<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iPeripheryPaymentsExtendedABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iPeripheryPaymentsExtendedABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iPeripheryPaymentsExtendedABI, ...config } as unknown as WriteContractArgs<
+    typeof iPeripheryPaymentsExtendedABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iPeripheryPaymentsExtendedABI}__.
+ */
+export function prepareWriteIPeripheryPaymentsExtended<
+  TAbi extends readonly unknown[] = typeof iPeripheryPaymentsExtendedABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({
+    abi: iPeripheryPaymentsExtendedABI,
+    ...config,
+  } as unknown as PrepareWriteContractConfig<TAbi, TFunctionName>)
+}
+
+/**
  * Wraps __{@link getContract}__ with `abi` set to __{@link iPeripheryPaymentsWithFeeABI}__.
  */
 export function getIPeripheryPaymentsWithFee(config: Omit<GetContractArgs, 'abi'>) {
@@ -5725,6 +8800,40 @@ export function prepareWriteIPeripheryPaymentsWithFee<
     TAbi,
     TFunctionName
   >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iPeripheryPaymentsWithFeeExtendedABI}__.
+ */
+export function getIPeripheryPaymentsWithFeeExtended(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iPeripheryPaymentsWithFeeExtendedABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iPeripheryPaymentsWithFeeExtendedABI}__.
+ */
+export function writeIPeripheryPaymentsWithFeeExtended<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iPeripheryPaymentsWithFeeExtendedABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iPeripheryPaymentsWithFeeExtendedABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iPeripheryPaymentsWithFeeExtendedABI, ...config } as unknown as WriteContractArgs<
+    typeof iPeripheryPaymentsWithFeeExtendedABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iPeripheryPaymentsWithFeeExtendedABI}__.
+ */
+export function prepareWriteIPeripheryPaymentsWithFeeExtended<
+  TAbi extends readonly unknown[] = typeof iPeripheryPaymentsWithFeeExtendedABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({
+    abi: iPeripheryPaymentsWithFeeExtendedABI,
+    ...config,
+  } as unknown as PrepareWriteContractConfig<TAbi, TFunctionName>)
 }
 
 /**
@@ -5895,6 +9004,40 @@ export function prepareWriteISwapRouter<
 }
 
 /**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iSwapRouter02ABI}__.
+ */
+export function getISwapRouter02(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iSwapRouter02ABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iSwapRouter02ABI}__.
+ */
+export function writeISwapRouter02<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iSwapRouter02ABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iSwapRouter02ABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iSwapRouter02ABI, ...config } as unknown as WriteContractArgs<
+    typeof iSwapRouter02ABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iSwapRouter02ABI}__.
+ */
+export function prepareWriteISwapRouter02<
+  TAbi extends readonly unknown[] = typeof iSwapRouter02ABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: iSwapRouter02ABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
  * Wraps __{@link getContract}__ with `abi` set to __{@link iTickLensABI}__.
  */
 export function getITickLens(config: Omit<GetContractArgs, 'abi'>) {
@@ -5909,6 +9052,118 @@ export function readITickLens<
   TFunctionName extends string = string,
 >(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return readContract({ abi: iTickLensABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iTokenValidatorABI}__.
+ */
+export function getITokenValidator(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iTokenValidatorABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iTokenValidatorABI}__.
+ */
+export function writeITokenValidator<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iTokenValidatorABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iTokenValidatorABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iTokenValidatorABI, ...config } as unknown as WriteContractArgs<
+    typeof iTokenValidatorABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iTokenValidatorABI}__.
+ */
+export function prepareWriteITokenValidator<
+  TAbi extends readonly unknown[] = typeof iTokenValidatorABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: iTokenValidatorABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iUniswapV2CalleeABI}__.
+ */
+export function getIUniswapV2Callee(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iUniswapV2CalleeABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iUniswapV2CalleeABI}__.
+ */
+export function writeIUniswapV2Callee<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iUniswapV2CalleeABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iUniswapV2CalleeABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iUniswapV2CalleeABI, ...config } as unknown as WriteContractArgs<
+    typeof iUniswapV2CalleeABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iUniswapV2CalleeABI}__.
+ */
+export function prepareWriteIUniswapV2Callee<
+  TAbi extends readonly unknown[] = typeof iUniswapV2CalleeABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: iUniswapV2CalleeABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iUniswapV2PairABI}__.
+ */
+export function getIUniswapV2Pair(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iUniswapV2PairABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link iUniswapV2PairABI}__.
+ */
+export function readIUniswapV2Pair<
+  TAbi extends readonly unknown[] = typeof iUniswapV2PairABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: iUniswapV2PairABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iUniswapV2PairABI}__.
+ */
+export function writeIUniswapV2Pair<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iUniswapV2PairABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iUniswapV2PairABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iUniswapV2PairABI, ...config } as unknown as WriteContractArgs<
+    typeof iUniswapV2PairABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iUniswapV2PairABI}__.
+ */
+export function prepareWriteIUniswapV2Pair<
+  TAbi extends readonly unknown[] = typeof iUniswapV2PairABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: iUniswapV2PairABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
 }
 
 /**
@@ -6200,6 +9455,40 @@ export function prepareWriteIUniswapV3SwapCallback<
 }
 
 /**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iv2SwapRouterABI}__.
+ */
+export function getIv2SwapRouter(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iv2SwapRouterABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iv2SwapRouterABI}__.
+ */
+export function writeIv2SwapRouter<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iv2SwapRouterABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iv2SwapRouterABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iv2SwapRouterABI, ...config } as unknown as WriteContractArgs<
+    typeof iv2SwapRouterABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iv2SwapRouterABI}__.
+ */
+export function prepareWriteIv2SwapRouter<
+  TAbi extends readonly unknown[] = typeof iv2SwapRouterABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: iv2SwapRouterABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
  * Wraps __{@link getContract}__ with `abi` set to __{@link iv3MigratorABI}__.
  */
 export function getIv3Migrator(config: Omit<GetContractArgs, 'abi'>) {
@@ -6228,6 +9517,71 @@ export function prepareWriteIv3Migrator<
   TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: iv3MigratorABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iv3SwapRouterABI}__.
+ */
+export function getIv3SwapRouter(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iv3SwapRouterABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iv3SwapRouterABI}__.
+ */
+export function writeIv3SwapRouter<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iv3SwapRouterABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iv3SwapRouterABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iv3SwapRouterABI, ...config } as unknown as WriteContractArgs<
+    typeof iv3SwapRouterABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iv3SwapRouterABI}__.
+ */
+export function prepareWriteIv3SwapRouter<
+  TAbi extends readonly unknown[] = typeof iv3SwapRouterABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: iv3SwapRouterABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link iwethABI}__.
+ */
+export function getIweth(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: iwethABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link iwethABI}__.
+ */
+export function writeIweth<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof iwethABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof iwethABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: iwethABI, ...config } as unknown as WriteContractArgs<typeof iwethABI, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link iwethABI}__.
+ */
+export function prepareWriteIweth<
+  TAbi extends readonly unknown[] = typeof iwethABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: iwethABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
     TFunctionName
   >)
@@ -6271,6 +9625,23 @@ export function prepareWriteIweth9<
     TAbi,
     TFunctionName
   >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link immutableStateABI}__.
+ */
+export function getImmutableState(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: immutableStateABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link immutableStateABI}__.
+ */
+export function readImmutableState<
+  TAbi extends readonly unknown[] = typeof immutableStateABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: immutableStateABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
 }
 
 /**
@@ -6391,6 +9762,50 @@ export function prepareWriteMessage<
 }
 
 /**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link mixedRouteQuoterV1ABI}__.
+ */
+export function getMixedRouteQuoterV1(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: mixedRouteQuoterV1ABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link mixedRouteQuoterV1ABI}__.
+ */
+export function readMixedRouteQuoterV1<
+  TAbi extends readonly unknown[] = typeof mixedRouteQuoterV1ABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: mixedRouteQuoterV1ABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link mixedRouteQuoterV1ABI}__.
+ */
+export function writeMixedRouteQuoterV1<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof mixedRouteQuoterV1ABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof mixedRouteQuoterV1ABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: mixedRouteQuoterV1ABI, ...config } as unknown as WriteContractArgs<
+    typeof mixedRouteQuoterV1ABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link mixedRouteQuoterV1ABI}__.
+ */
+export function prepareWriteMixedRouteQuoterV1<
+  TAbi extends readonly unknown[] = typeof mixedRouteQuoterV1ABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: mixedRouteQuoterV1ABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
  * Wraps __{@link getContract}__ with `abi` set to __{@link multicallABI}__.
  */
 export function getMulticall(config: Omit<GetContractArgs, 'abi'>) {
@@ -6419,6 +9834,40 @@ export function prepareWriteMulticall<
   TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: multicallABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link multicallExtendedABI}__.
+ */
+export function getMulticallExtended(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: multicallExtendedABI, ...config })
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link multicallExtendedABI}__.
+ */
+export function writeMulticallExtended<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof multicallExtendedABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof multicallExtendedABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: multicallExtendedABI, ...config } as unknown as WriteContractArgs<
+    typeof multicallExtendedABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link multicallExtendedABI}__.
+ */
+export function prepareWriteMulticallExtended<
+  TAbi extends readonly unknown[] = typeof multicallExtendedABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: multicallExtendedABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
     TFunctionName
   >)
@@ -6529,6 +9978,23 @@ export function prepareWriteNonfungiblePositionManager<
 }
 
 /**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link oracleSlippageABI}__.
+ */
+export function getOracleSlippage(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: oracleSlippageABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link oracleSlippageABI}__.
+ */
+export function readOracleSlippage<
+  TAbi extends readonly unknown[] = typeof oracleSlippageABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: oracleSlippageABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
  * Wraps __{@link getContract}__ with `abi` set to __{@link ownableABI}__.
  */
 export function getOwnable(config: Omit<GetContractArgs, 'abi'>) {
@@ -6633,6 +10099,53 @@ export function prepareWritePeripheryPayments<
 }
 
 /**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link peripheryPaymentsExtendedABI}__.
+ */
+export function getPeripheryPaymentsExtended(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: peripheryPaymentsExtendedABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link peripheryPaymentsExtendedABI}__.
+ */
+export function readPeripheryPaymentsExtended<
+  TAbi extends readonly unknown[] = typeof peripheryPaymentsExtendedABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: peripheryPaymentsExtendedABI, ...config } as unknown as ReadContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link peripheryPaymentsExtendedABI}__.
+ */
+export function writePeripheryPaymentsExtended<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof peripheryPaymentsExtendedABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof peripheryPaymentsExtendedABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: peripheryPaymentsExtendedABI, ...config } as unknown as WriteContractArgs<
+    typeof peripheryPaymentsExtendedABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link peripheryPaymentsExtendedABI}__.
+ */
+export function prepareWritePeripheryPaymentsExtended<
+  TAbi extends readonly unknown[] = typeof peripheryPaymentsExtendedABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: peripheryPaymentsExtendedABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
  * Wraps __{@link getContract}__ with `abi` set to __{@link peripheryPaymentsWithFeeABI}__.
  */
 export function getPeripheryPaymentsWithFee(config: Omit<GetContractArgs, 'abi'>) {
@@ -6680,6 +10193,53 @@ export function prepareWritePeripheryPaymentsWithFee<
 }
 
 /**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link peripheryPaymentsWithFeeExtendedABI}__.
+ */
+export function getPeripheryPaymentsWithFeeExtended(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: peripheryPaymentsWithFeeExtendedABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link peripheryPaymentsWithFeeExtendedABI}__.
+ */
+export function readPeripheryPaymentsWithFeeExtended<
+  TAbi extends readonly unknown[] = typeof peripheryPaymentsWithFeeExtendedABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: peripheryPaymentsWithFeeExtendedABI, ...config } as unknown as ReadContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link peripheryPaymentsWithFeeExtendedABI}__.
+ */
+export function writePeripheryPaymentsWithFeeExtended<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof peripheryPaymentsWithFeeExtendedABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof peripheryPaymentsWithFeeExtendedABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: peripheryPaymentsWithFeeExtendedABI, ...config } as unknown as WriteContractArgs<
+    typeof peripheryPaymentsWithFeeExtendedABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link peripheryPaymentsWithFeeExtendedABI}__.
+ */
+export function prepareWritePeripheryPaymentsWithFeeExtended<
+  TAbi extends readonly unknown[] = typeof peripheryPaymentsWithFeeExtendedABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({
+    abi: peripheryPaymentsWithFeeExtendedABI,
+    ...config,
+  } as unknown as PrepareWriteContractConfig<TAbi, TFunctionName>)
+}
+
+/**
  * Wraps __{@link getContract}__ with `abi` set to __{@link poolInitializerABI}__.
  */
 export function getPoolInitializer(config: Omit<GetContractArgs, 'abi'>) {
@@ -6718,6 +10278,90 @@ export function prepareWritePoolInitializer<
   TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: poolInitializerABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link quoterABI}__.
+ */
+export function getQuoter(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: quoterABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link quoterABI}__.
+ */
+export function readQuoter<TAbi extends readonly unknown[] = typeof quoterABI, TFunctionName extends string = string>(
+  config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>
+) {
+  return readContract({ abi: quoterABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link quoterABI}__.
+ */
+export function writeQuoter<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof quoterABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof quoterABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: quoterABI, ...config } as unknown as WriteContractArgs<typeof quoterABI, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link quoterABI}__.
+ */
+export function prepareWriteQuoter<
+  TAbi extends readonly unknown[] = typeof quoterABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: quoterABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link quoterV2ABI}__.
+ */
+export function getQuoterV2(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: quoterV2ABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link quoterV2ABI}__.
+ */
+export function readQuoterV2<
+  TAbi extends readonly unknown[] = typeof quoterV2ABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: quoterV2ABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link quoterV2ABI}__.
+ */
+export function writeQuoterV2<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof quoterV2ABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof quoterV2ABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: quoterV2ABI, ...config } as unknown as WriteContractArgs<
+    typeof quoterV2ABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link quoterV2ABI}__.
+ */
+export function prepareWriteQuoterV2<
+  TAbi extends readonly unknown[] = typeof quoterV2ABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: quoterV2ABI, ...config } as unknown as PrepareWriteContractConfig<
     TAbi,
     TFunctionName
   >)
@@ -6802,6 +10446,94 @@ export function prepareWriteSwapRouter<
 }
 
 /**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link swapRouter02ABI}__.
+ */
+export function getSwapRouter02(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: swapRouter02ABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link swapRouter02ABI}__.
+ */
+export function readSwapRouter02<
+  TAbi extends readonly unknown[] = typeof swapRouter02ABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: swapRouter02ABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link swapRouter02ABI}__.
+ */
+export function writeSwapRouter02<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof swapRouter02ABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof swapRouter02ABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: swapRouter02ABI, ...config } as unknown as WriteContractArgs<
+    typeof swapRouter02ABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link swapRouter02ABI}__.
+ */
+export function prepareWriteSwapRouter02<
+  TAbi extends readonly unknown[] = typeof swapRouter02ABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: swapRouter02ABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link tokenValidatorABI}__.
+ */
+export function getTokenValidator(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: tokenValidatorABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link tokenValidatorABI}__.
+ */
+export function readTokenValidator<
+  TAbi extends readonly unknown[] = typeof tokenValidatorABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: tokenValidatorABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link tokenValidatorABI}__.
+ */
+export function writeTokenValidator<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof tokenValidatorABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof tokenValidatorABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: tokenValidatorABI, ...config } as unknown as WriteContractArgs<
+    typeof tokenValidatorABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link tokenValidatorABI}__.
+ */
+export function prepareWriteTokenValidator<
+  TAbi extends readonly unknown[] = typeof tokenValidatorABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: tokenValidatorABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
  * Wraps __{@link getContract}__ with `abi` set to __{@link usdcABI}__.
  */
 export function getUsdc(config: Omit<GetContractArgs, 'abi'>) {
@@ -6836,4 +10568,92 @@ export function prepareWriteUsdc<
   TFunctionName extends string = string,
 >(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
   return prepareWriteContract({ abi: usdcABI, ...config } as unknown as PrepareWriteContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link v2SwapRouterABI}__.
+ */
+export function getV2SwapRouter(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: v2SwapRouterABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link v2SwapRouterABI}__.
+ */
+export function readV2SwapRouter<
+  TAbi extends readonly unknown[] = typeof v2SwapRouterABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: v2SwapRouterABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link v2SwapRouterABI}__.
+ */
+export function writeV2SwapRouter<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof v2SwapRouterABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof v2SwapRouterABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: v2SwapRouterABI, ...config } as unknown as WriteContractArgs<
+    typeof v2SwapRouterABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link v2SwapRouterABI}__.
+ */
+export function prepareWriteV2SwapRouter<
+  TAbi extends readonly unknown[] = typeof v2SwapRouterABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: v2SwapRouterABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link getContract}__ with `abi` set to __{@link v3SwapRouterABI}__.
+ */
+export function getV3SwapRouter(config: Omit<GetContractArgs, 'abi'>) {
+  return getContract({ abi: v3SwapRouterABI, ...config })
+}
+
+/**
+ * Wraps __{@link readContract}__ with `abi` set to __{@link v3SwapRouterABI}__.
+ */
+export function readV3SwapRouter<
+  TAbi extends readonly unknown[] = typeof v3SwapRouterABI,
+  TFunctionName extends string = string,
+>(config: Omit<ReadContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return readContract({ abi: v3SwapRouterABI, ...config } as unknown as ReadContractConfig<TAbi, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link writeContract}__ with `abi` set to __{@link v3SwapRouterABI}__.
+ */
+export function writeV3SwapRouter<TFunctionName extends string>(
+  config:
+    | Omit<WriteContractPreparedArgs<typeof v3SwapRouterABI, TFunctionName>, 'abi'>
+    | Omit<WriteContractUnpreparedArgs<typeof v3SwapRouterABI, TFunctionName>, 'abi'>
+) {
+  return writeContract({ abi: v3SwapRouterABI, ...config } as unknown as WriteContractArgs<
+    typeof v3SwapRouterABI,
+    TFunctionName
+  >)
+}
+
+/**
+ * Wraps __{@link prepareWriteContract}__ with `abi` set to __{@link v3SwapRouterABI}__.
+ */
+export function prepareWriteV3SwapRouter<
+  TAbi extends readonly unknown[] = typeof v3SwapRouterABI,
+  TFunctionName extends string = string,
+>(config: Omit<PrepareWriteContractConfig<TAbi, TFunctionName>, 'abi'>) {
+  return prepareWriteContract({ abi: v3SwapRouterABI, ...config } as unknown as PrepareWriteContractConfig<
+    TAbi,
+    TFunctionName
+  >)
 }

@@ -6,6 +6,7 @@ import {
   getUsdc,
   iSwapRouterABI,
   nonfungiblePositionManagerABI,
+  swapRouter02ABI,
   swapRouterABI,
   usdcABI,
   writeNonfungiblePositionManager,
@@ -236,7 +237,7 @@ export function Dex() {
     if (walletClient != undefined && address != undefined) {
       const { request: swapTokens } = await publicClient.simulateContract({
         account: address,
-        abi: swapRouterABI,
+        abi: swapRouter02ABI,
         address: uniswapRouter as Address,
         functionName: 'exactInputSingle',
         args: [
@@ -245,7 +246,6 @@ export function Dex() {
             tokenOut: token2Address,
             fee: 3000,
             recipient: address as Address,
-            deadline: BigInt(Math.floor(Date.now() / 1000) + 60 * 10),
             amountIn: parseUnits(token1SwapInput.toString(), 6),
             amountOutMinimum: 0n,
             sqrtPriceLimitX96: 0n,
